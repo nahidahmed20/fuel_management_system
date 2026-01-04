@@ -28,7 +28,6 @@
         .login-container {
             backdrop-filter: blur(12px);
             background: rgba(255, 255, 255, 0.15);
-            border-radius: 20px;
             padding: 50px 35px;
             max-width: 420px;
             width: 100%;
@@ -69,7 +68,7 @@
         }
 
         .form-control {
-            border-radius: 12px;
+            border-radius: 0px !important;
             padding: 10px 15px;
             border: none;
             background: rgba(255, 255, 255, 0.25);
@@ -96,16 +95,16 @@
 
         /* Buttons */
         .btn-primary {
-            background: #f77f00;
+            background: #10795b;
             border: none;
-            border-radius: 12px;
+            border-radius: 0px !important;
             font-weight: 600;
             padding: 10px;
             transition: 0.3s;
         }
 
         .btn-primary:hover {
-            background: #ff9b3c;
+            background: #128f6b;
         }
 
         /* Responsive */
