@@ -1,0 +1,71 @@
+@extends('master')
+
+@section('title')
+    Nozzle Create
+@endsection
+
+@push('style')
+<style>
+    .card {
+        box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1),
+                    4px 8px 20px rgba(0, 0, 0, 0.05);
+    }
+</style>
+@endpush
+
+@section('content')
+<div class="content-page">
+    <div class="container-fluid add-form-list">
+        <div class="row justify-content-center">
+            <div class="col-sm-12">
+                <div class="card shadow-lg">
+                    <div class="card-header d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center" style="background-color: #27548A; color: #fff;">
+                        <div class="header-title mb-2 mb-sm-0">
+                            <h4 class="card-title m-0">
+                                <i class="bi bi-plus-square me-2"></i> Create Nozzle
+                            </h4>
+                        </div>
+                        <a href="{{ route('nozzle.index') }}" class="btn btn-sm text-white rounded-1" style="background: linear-gradient(45deg, #36D1DC, #5B86E5); color: white; border: none; font-weight: 500; padding: 6px 12px; border-radius: 5px;">
+                            <i class="fas fa-arrow-left me-1"></i> Nozzle List
+                        </a>
+                    </div>
+
+                    <div class="card-body">
+                        <form action="{{ route('nozzle.store') }}" method="POST">
+                            @csrf
+
+                            <div class="row">
+                                <!-- Nozzle Name -->
+                                <div class="mb-3 col-md-6">
+                                    <label for="name">Nozzle Name</label>
+                                    <input type="text" name="name" class="form-control" value="{{ old('name') }}" required>
+                                </div>
+
+                                <!-- Fuel Type -->
+                                <div class="mb-3 col-md-6">
+                                    <label for="fuel_type_id">Fuel Type</label>
+                                    <select name="fuel_type_id" class="form-control" required>
+                                        <option value="" disabled selected>Select Fuel Type</option>
+                                        @foreach($fuelTypes as $fuel)
+                                            <option value="{{ $fuel->id }}" {{ old('fuel_type_id') == $fuel->id ? 'selected' : '' }}>
+                                                {{ $fuel->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <div class="mt-3">
+                                <button type="submit" class="btn text-white" style="background: linear-gradient(45deg, #0f9b8e, #129990); padding: 8px 16px; border-radius: 5px; border: none;">
+                                    Create Nozzle
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
