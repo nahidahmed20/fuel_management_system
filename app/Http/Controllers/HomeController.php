@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+    
     public function index()
     {
         return view('auth.login');
@@ -36,7 +37,7 @@ class HomeController extends Controller
         return view('home.index', [
             'fuelSaleToday' => FuelOut::whereDate('date', $today)->sum('total_sell'),
             'productSaleToday' => ProductOut::whereDate('date', $today)->sum('total_price'),
-            'productStock' => $availableProductStock, 
+            'productStock' => $availableProductStock,
             'expenseToday' => Expense::whereDate('date', $today)->sum('amount'),
             'dueToday' => CustomerDue::whereDate('due_date', $today)->sum('amount_due'),
 

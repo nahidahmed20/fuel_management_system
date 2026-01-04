@@ -29,18 +29,18 @@ use App\Http\Controllers\NozzleMeterController;
 use App\Http\Controllers\ProductSaleController;
 use App\Http\Controllers\CashWithdrawController;
 use App\Http\Controllers\ProductStockController;
+use App\Http\Controllers\frontend\FrontendController;
 use App\Http\Controllers\CustomerDuePaymentController;
 
-Route::get('/', function () {
+Route::get('/login', function () {
     return view('auth.login');
 });
 
-// Route::get('/home', function () {
-//     return view('home.index');
-// })->middleware(['auth', 'verified'])->name('home');
+Route::get('/', [FrontendController::class, 'homeDashboard'])->name('home.dashboard');
 Route::get('/home', [HomeController::class, 'home'])->middleware(['auth', 'verified'])->name('home');
 
 Route::middleware('auth')->group(function () {
+
     Route::get('/dashboard/data', [HomeController::class, 'getData'])->name('dashboard.data');
 
     Route::prefix('fuel/types')->group(function () {
@@ -67,7 +67,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/meters/destroy/{id}', [NozzleController::class, 'nozzleMeterDestroy'])->name('nozzle.meter.destroy');
     });
      Route::get('/get-latest-meter/{nozzle_id}', [NozzleController::class, 'getLatestMeter'])->name('nozzle.getLatestMeter');
-    
+
     Route::prefix('fuel/stock')->group(function () {
         Route::get('/index', [FuelStockController::class, 'index'])->name('fuel.stock.index');
         Route::get('/create', [FuelStockController::class, 'create'])->name('fuel.stock.create');
@@ -94,7 +94,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/update{id}', [FuelSellController::class, 'update'])->name('fuel.sell.update');
         Route::get('/destroy{id}', [FuelSellController::class, 'destroy'])->name('fuel.sell.destroy');
 
-        
+
         Route::get('/report/{type}', [FuelController::class, 'reportView'])->name('fuel.report.view');
         Route::get('/report/download/{type}', [FuelController::class, 'downloadPdf'])->name('fuel.report.download');
     });
@@ -126,7 +126,7 @@ Route::middleware('auth')->group(function () {
 
     });
 
-    // Nojel Meter Reading Route 
+    // Nojel Meter Reading Route
     Route::prefix('nozzle-meters')->group(function () {
         Route::get('/create', [NozzleMeterController::class, 'create'])->name('nozzle-meters.create');
         Route::post('/store', [NozzleMeterController::class, 'store'])->name('nozzle-meters.store');
@@ -138,7 +138,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/get-prev-meter/{nozzle_id}', [NozzleMeterController::class, 'getPrevMeter']);
     Route::get('/get-nozzle-meter/{nozzle_id}', [NozzleMeterController::class, 'getNozzleMeter'])->name('get.nozzle.meter');
 
-    // Product Route 
+    // Product Route
     Route::prefix('products')->group(function () {
         Route::get('/', [ProductController::class, 'index'])->name('product.index');
         Route::get('/create', [ProductController::class, 'createProduct'])->name('product.create');
@@ -148,7 +148,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/{product}/destroy', [ProductController::class, 'destroy'])->name('product.destroy');
     });
 
-    // Product Store Route 
+    // Product Store Route
     Route::prefix('product/stocks')->group(function () {
         Route::get('/', [ProductStockController::class, 'index'])->name('product.stock.index');
         Route::get('/create', [ProductStockController::class, 'create'])->name('product.stock.create');
@@ -158,7 +158,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/destroy/{id}', [ProductStockController::class, 'destroy'])->name('product.stock.destroy');
     });
 
-    // Product Sales Route 
+    // Product Sales Route
     Route::prefix('product/sales')->group(function () {
         Route::get('/', [ProductSaleController::class, 'index'])->name('product.sales.index');
         Route::get('/create', [ProductSaleController::class, 'create'])->name('product.sales.create');
@@ -173,7 +173,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/product/report/{type}', [ProductController::class, 'reportView'])->name('product.report.view');
     Route::get('/product/report-pdf/{type}', [ProductController::class, 'downloadProductPdf'])->name('product.report.download');
 
-    // Expense Route 
+    // Expense Route
     Route::prefix('expense')->group(function () {
         Route::get('/', [ExpenseController::class, 'index'])->name('expense.index');
         Route::get('/create', [ExpenseController::class, 'create'])->name('expense.create');
@@ -187,10 +187,10 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('customers', CustomerController::class);
 
-    // Borrower Route 
+    // Borrower Route
     Route::resource('borrowers', BorrowerController::class);
     Route::resource('loans', LoanController::class);
-   
+
     Route::get('/loans/{borrower}', [BorrowerController::class, 'show'])->name('loans.show');
     Route::get('/borrower/due/payments/create/{id}', [BorrowerController::class, 'paymentForm'])->name('borrower.payments.create');
 
@@ -209,7 +209,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/loan/payment/report/{type}', [LoanPaymentController::class, 'loanPaymentReportView'])->name('loan.payment.report');
     Route::get('/loan/payment/report/pdf/{type}', [LoanPaymentController::class, 'loanPaymentReportPdf'])->name('loan.payment.report.pdf');
 
-    // Customer Due Route 
+    // Customer Due Route
     Route::prefix('customer-due')->group(function () {
         Route::get('/list',[CustomerDueController::class,'index'])->name('customer_due.index');
         Route::get('/create',[CustomerDueController::class,'create'])->name('customer_due.create');
@@ -221,15 +221,15 @@ Route::middleware('auth')->group(function () {
     });
     Route::get('/customer_due/filter', [CustomerDueController::class, 'filterByDate'])->name('customer_due.filter');
 
-    
+
     Route::resource('customer-due-payments', CustomerDuePaymentController::class);
     Route::get('/customer/due/total-due', [CustomerDueController::class, 'getTotalDue'])->name('customer_due.getTotalDue');
     Route::get('/customer/due/report/{type}', [CustomerDuePaymentController::class, 'customerDueReportView'])->name('customer.due.report');
     Route::get('/customer/due/report/pdf/{type}', [CustomerDuePaymentController::class, 'customerDueReportPdf'])->name('customer.due.report.pdf');
     Route::get('/customer/payment/report/{type}', [CustomerDuePaymentController::class, 'customerPaymentReportView'])->name('customer.payment.report');
     Route::get('/customer/payment/report/pdf/{type}', [CustomerDuePaymentController::class, 'customerPaymentReportPdf'])->name('customer.payment.report.pdf');
-    
-    // Account Route 
+
+    // Account Route
     Route::prefix('account')->group(function () {
         Route::get('/', [AccountController::class, 'index'])->name('account.index');
         Route::get('/create', [AccountController::class, 'create'])->name('account.create');
@@ -241,7 +241,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/report/pdf/{type}', [AccountController::class, 'accountReportPdf'])->name('account.report.pdf');
     });
 
-    // Account Route 
+    // Account Route
     Route::prefix('cash/withdraw')->group(function () {
         Route::get('/', [CashWithdrawController ::class, 'index'])->name('cash.withdraw.index');
         Route::get('/create', [CashWithdrawController ::class, 'create'])->name('cash.withdraw.create');
@@ -260,7 +260,7 @@ Route::middleware('auth')->group(function () {
 
 
 
-    // User Route 
+    // User Route
     Route::get('/user/list',[UserController::class,'index'])->name('user.list');
     Route::get('/user/create',[UserController::class,'userCreate'])->name('user.create');
     Route::post('/user/store',[UserController::class,'userStore'])->name('user.store');
