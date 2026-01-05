@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 
 class AccountController extends Controller
 {
+    // public function __construct()
+    // {
+    //     $this->middleware('permission:product view')->only('index');
+    //     $this->middleware('permission:product create')->only('create','store');
+    //     $this->middleware('permission:product edit')->only('edit','update');
+    //     $this->middleware('permission:product delete')->only('destroy');
+    // }
     public function index()
     {
         $accounts = Account::orderByDesc('id')->get();

@@ -7,32 +7,37 @@ use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 class UserController extends Controller
 {
+    // List users
     public function index()
     {
         $users = User::orderBy('id','desc')->get();
-        
-        return view('user.index',compact('users'));
+        return view('user.index', compact('users'));
     }
 
+    // Show create form
     public function userCreate()
     {
-        return view('user.create');
+        $roles = Role::all(); // <--- fetch all roles for assign
+        return view('user.create', compact('roles'));
     }
 
+    // Store user
     public function userStore(Request $request)
     {
         $request->validate([
             'name'          => 'required',
             'phone_number'  => 'required|unique:users,phone',
             'email'         => 'required|unique:users,email',
-            'role'          => 'required',
+            'role'          => 'required',  // role name from select
             'password'      => 'required|min:8',
             'gender'        => 'required',
         ]);
 
+        // Image upload
         if ($request->hasFile('user_image')) {
             $image = $request->file('user_image');
             $imageName = time() . '.' . $image->getClientOriginalExtension();
@@ -41,48 +46,51 @@ class UserController extends Controller
         } else {
             $imagePath = 'upload/users/dummy.jpg';
         }
-        // dd($request->all());
-        User::create([
+
+        // Create user
+        $user = User::create([
             'name'     => $request->name,
             'slug'     => Str::slug($request->name). '_' . rand(100000, 999999),
             'phone'    => $request->phone_number,
-            'role'     => $request->role,
             'email'    => $request->email,
             'address'  => $request->address,
-            'gender'   => $request->gender,  
-            'password' => Hash::make($request['password']),
+            'gender'   => $request->gender,
+            'password' => Hash::make($request->password),
             'image'    => $imagePath,
             'status'   => $request->status,
         ]);
 
-        // Redirect with success message
+        // Assign role using Spatie
+        $user->assignRole($request->role);  // <--- Spatie method
+
         return redirect()->route('user.list')->with('success', 'User created successfully!');
     }
 
-
+    // Show edit form
     public function userEdit($slug)
     {
-        $user = User::where('slug',$slug)->first();
- 
-        return view('user.edit',compact('user'));
+        $user = User::where('slug', $slug)->first();
+        $roles = Role::all(); // <--- fetch all roles
+        return view('user.edit', compact('user','roles'));
     }
 
+    // Update user
     public function userUpdate(Request $request, $id)
     {
         $user = User::findOrFail($id);
-       
+
         $request->validate([
             'name'          => 'required',
             'phone_number'  => 'required',
             'email'         => 'required',
-            'role'          => 'required',
+            'role'          => 'required',  // role select
             'gender'        => 'required',
-            'password'      => 'nullable|min:8', 
+            'password'      => 'nullable|min:8',
         ]);
 
         if ($request->hasFile('user_image')) {
             if (!empty($user->image) && file_exists(public_path($user->image))) {
-                unlink(public_path($user->image)); 
+                unlink(public_path($user->image));
             }
             $image = $request->file('user_image');
             $imageName = time() . '.' . $image->getClientOriginalExtension();
@@ -96,7 +104,6 @@ class UserController extends Controller
             'name'     => $request->name,
             'slug'     => Str::slug($request->name). '_' . rand(100000, 999999),
             'phone'    => $request->phone_number,
-            'role'     => $request->role,
             'email'    => $request->email,
             'address'  => $request->address,
             'gender'   => $request->gender,
@@ -104,23 +111,28 @@ class UserController extends Controller
             'status'   => $request->status,
         ];
 
-        if ($request->filled('password')) { 
+        if ($request->filled('password')) {
             $updateData['password'] = Hash::make($request->password);
         }
 
         $user->update($updateData);
 
+        // Sync role
+        $user->syncRoles([$request->role]); // <--- Spatie syncRoles replaces old role
+
         return redirect()->route('user.list')->with('success', 'User updated successfully!');
     }
 
+    // Delete user
     public function userDelete($id)
     {
         $user = User::findOrFail($id);
 
-        if(file_exists(public_path($user->image)) ){
-            unlink(public_path($user->image)); 
+        if(file_exists(public_path($user->image))){
+            unlink(public_path($user->image));
         }
+
         $user->delete();
-        return redirect()->back()->with('warning', 'User delete successfully!');
+        return redirect()->back()->with('warning', 'User deleted successfully!');
     }
 }

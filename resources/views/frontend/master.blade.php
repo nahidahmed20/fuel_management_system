@@ -59,8 +59,8 @@
  			<div class="row">
  				<div class="col-lg-6 col-md-12 col-sm-12">
  					<div class="contact-info">
- 						<i class="las la-envelope"></i> info@fossil.com
- 						<i class="las la-map-marker"></i> 66, Broklyn St, New York, USA
+ 						<i class="las la-envelope"></i> m.nahidcse@gmail.com
+ 						<i class="las la-map-marker"></i> 1/C Road One Shyamoli, Dhaka
  					</div>
  				</div>
  				<div class="col-lg-6 col-md-12 col-sm-12 text-end">

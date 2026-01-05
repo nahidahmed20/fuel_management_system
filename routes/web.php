@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FuelController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoanController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\TypeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\MobilController;
@@ -22,6 +23,7 @@ use App\Http\Controllers\MobilOutController;
 use App\Http\Controllers\FuelShortController;
 use App\Http\Controllers\FuelStockController;
 use App\Http\Controllers\MobilStockController;
+use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\BorrowMoneyController;
 use App\Http\Controllers\CustomerDueController;
 use App\Http\Controllers\LoanPaymentController;
@@ -40,6 +42,9 @@ Route::get('/', [FrontendController::class, 'homeDashboard'])->name('home.dashbo
 Route::get('/home', [HomeController::class, 'home'])->middleware(['auth', 'verified'])->name('home');
 
 Route::middleware('auth')->group(function () {
+    Route::resource('roles', RoleController::class);
+    Route::resource('permissions', PermissionController::class);
+
 
     Route::get('/dashboard/data', [HomeController::class, 'getData'])->name('dashboard.data');
 
