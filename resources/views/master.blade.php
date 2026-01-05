@@ -251,11 +251,11 @@
 
 
                         {{-- Customer Dues --}}
-                        
+
                         @php
-                            $dueActive = 
-                                Request::routeIs('customers.*') || 
-                                Request::routeIs('customer_due.*') || 
+                            $dueActive =
+                                Request::routeIs('customers.*') ||
+                                Request::routeIs('customer_due.*') ||
                                 Request::routeIs('customer-due-payments.*');
                         @endphp
 
@@ -497,6 +497,17 @@
                                 </a>
 
                                 <ul id="people" class="iq-submenu collapse list-unstyled ps-4 {{ Request::is('user*') ? 'show' : '' }}">
+                                    <li>
+                                        <a href="{{ route('permissions.index') }}" class="{{ Request::routeIs('permissions.index') ? 'active' : '' }}">
+                                            <i class="fas fa-user-plus text-success me-2"></i> Permission
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="{{ route('roles.index') }}" class="{{ Request::routeIs('roles.index') ? 'active' : '' }}">
+                                            <i class="fas fa-user-plus text-success me-2"></i> Role
+                                        </a>
+                                    </li>
 
                                     <li>
                                         <a href="{{ route('user.list') }}" class="{{ Request::routeIs('user.list') ? 'active' : '' }}">
@@ -524,30 +535,30 @@
         </div>
 <style>
     .x-flash {
-        position: fixed; 
-        top: 0; 
+        position: fixed;
+        top: 0;
         left: 0;
         right: 0;
-        z-index: 1050; 
-        margin: 0 auto; 
-        width: 100%; 
+        z-index: 1050;
+        margin: 0 auto;
+        width: 100%;
         padding: 10px;
         box-sizing: border-box;
-        background-color: #f8d7da; 
+        background-color: #f8d7da;
         color: #721c24;
         text-align: center;
         font-weight: 600;
     }
 </style>
 
-       
+
    @flasher_render
 
         <div class="iq-top-navbar ">
             <div class="iq-navbar-custom">
                 <nav class="navbar navbar-expand-lg  px-3">
                     <div class="container-fluid d-flex justify-content-between align-items-center">
-                        
+
                         <!-- Logo & Site Name -->
                         <div class="d-flex align-items-center">
                             <i class="ri-menu-line wrapper-menu text-white fs-4 me-3" id="sidebarToggle"></i>
@@ -591,13 +602,13 @@
         @yield('content')
 
 
-        
+
     </div>
     <!-- Wrapper End-->
     <!--<footer class="iq-footer bg-light py-3 mt-auto">-->
     <!--</footer>-->
-  
-    
+
+
 
     @include('include.script')
 </body>
