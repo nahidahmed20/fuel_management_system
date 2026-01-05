@@ -34,11 +34,10 @@
 </style>
 <style>
     .nozzle-select {
-        height: calc(2.5rem + 2px);
+        height: calc(36px + 2px);
         padding: 0.375rem 0.75rem;
         font-size: 1rem;
         line-height: 1.5;
-        border-radius: 0.375rem;
         border: 1px solid #ced4da;
         background-color: #fff;
         color: #495057;
@@ -52,7 +51,7 @@
     <div class="container-fluid add-form-list">
         <div class="row">
             <div class="col-sm-12 mx-auto">
-                <div class="card shadow-lg">
+                <div class="card shadow-lg rounded-0">
                     <div class="card-header d-flex justify-content-between align-items-center flex-wrap" style="background-color: #27548A; color: #fff;">
                         <div class="header-title">
                             <h4 class="card-title mb-0">
@@ -61,8 +60,8 @@
                         </div>
                         <a href="{{ route('nozzle.meter.index') }}" 
                             class="btn btn-sm d-flex align-items-center justify-content-center mt-2 mt-sm-0"
-                            style="background: linear-gradient(45deg, #36D1DC, #5B86E5); color: white; border: none; font-weight: 500; padding: 6px 12px; border-radius: 5px;">
-                            <i class="fas fa-arrow-left me-1"></i> Back to Nozzle Meters
+                            style="background: linear-gradient(45deg, #36D1DC, #5B86E5); color: white; border: none; font-weight: 500; padding: 6px 12px; border-radius: 0px;">
+                            <i class="fas fa-arrow-left me-1"></i>Nozzle list
                         </a>
                     </div>
                     
@@ -76,7 +75,7 @@
 
                             <div class="row">
                                 {{-- Nozzle --}}
-                                <div class="mb-3 col-md-6">
+                                <div class="col-md-4">
                                     <label for="nozzle_id" class="form-label">Select Nozzle</label>
                                     <select name="nozzle_id" id="nozzle_id" class="form-control nozzle-select" required>
                                         <option value="">-- Select Nozzle --</option>
@@ -87,29 +86,32 @@
                                 </div>
 
                                 {{-- Previous Meter --}}
-                                <div class="mb-3 col-md-6">
+                                <div class=" col-md-4">
                                     <label for="prev_meter" class="form-label">Previous Meter Reading</label>
                                     <input type="number" step="any" name="prev_meter" id="prev_meter" class="form-control" placeholder="Previous reading"  required>
                                 </div>
 
                                 {{-- Current Meter --}}
-                                <div class="mb-3 col-md-6">
+                                <div class=" col-md-4">
                                     <label for="curr_meter" class="form-label">Current Meter Reading</label>
                                     <input type="number" step="any" name="curr_meter" id="curr_meter" class="form-control" placeholder="Current reading" required>
                                 </div>
 
                                 {{-- Date --}}
-                                <div class="mb-3 col-md-6">
+                                <div class=" col-md-4">
                                     <label for="date" class="form-label">Date</label>
                                     <input type="date" name="date" id="date" class="form-control" required>
                                 </div>
                             </div>
-
-                            <button type="submit" 
-                                class="btn text-white fw-semibold d-flex align-items-center justify-content-center"
-                                style="background: linear-gradient(45deg, #0f9b8e, #129990); padding: 8px 16px; border-radius: 5px; border: none;">
-                                <i class="fas fa-save me-1"></i> Save Meter
-                            </button>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="d-flex justify-content-md-end justify-content-center mt-3">
+                                        <button type="submit" class="btn text-white px-4" style="background-color:#129990;border-radius: 0px;">
+                                            Save
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
                         </form>
                     </div>
 

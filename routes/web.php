@@ -32,7 +32,7 @@ use App\Http\Controllers\ProductStockController;
 use App\Http\Controllers\frontend\FrontendController;
 use App\Http\Controllers\CustomerDuePaymentController;
 
-Route::get('/login', function () {
+Route::get('/admin', function () {
     return view('auth.login');
 });
 

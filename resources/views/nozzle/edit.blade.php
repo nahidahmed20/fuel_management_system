@@ -18,7 +18,7 @@
     <div class="container-fluid add-form-list">
         <div class="row justify-content-center">
             <div class="col-sm-12">
-                <div class="card shadow-lg">
+                <div class="card shadow-lg rounded-0">
                     <div class="card-header d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center" style="background-color: #27548A; color: #fff;">
                         <div class="header-title mb-2 mb-sm-0">
                             <h4 class="card-title m-0">
@@ -26,7 +26,7 @@
                             </h4>
 
                         </div>
-                        <a href="{{ route('nozzle.index') }}" class="btn btn-sm text-white rounded-1" style="background: linear-gradient(45deg, #36D1DC, #5B86E5); color: white; border: none; font-weight: 500; padding: 6px 12px; border-radius: 5px;">
+                        <a href="{{ route('nozzle.index') }}" class="btn btn-sm text-white rounded-1" style="background: linear-gradient(45deg, #36D1DC, #5B86E5); color: white; border: none; font-weight: 500; padding: 6px 12px; border-radius: 0px;">
                             <i class="fas fa-arrow-left me-1"></i> Nozzle List
                         </a>
                     </div>
@@ -36,12 +36,12 @@
                             @csrf
 
                             <div class="row">
-                                <div class="mb-3 col-md-6">
+                                <div class="mb-3 col-md-4">
                                     <label for="name">Nozzle Name</label>
                                     <input type="text" name="name" class="form-control" value="{{ $nozzle->name }}" required>
                                 </div>
 
-                                <div class="mb-3 col-md-6">
+                                <div class="mb-3 col-md-4">
                                     <label for="fuel_type_id">Fuel Type</label>
                                     <select name="fuel_type_id" class="form-control" required>
                                         @foreach($fuelTypes as $fuel)
@@ -53,7 +53,15 @@
                                 </div>
                             </div>
 
-                            <button type="submit" class="btn text-white" style="background: linear-gradient(45deg, #0f9b8e, #129990); padding: 8px 16px; border-radius: 5px; border: none;">Update Nozzle</button>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="d-flex justify-content-md-end justify-content-center mt-3">
+                                        <button type="submit" class="btn text-white px-4" style="background-color:#129990;border-radius: 0px;">
+                                            Update
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
                         </form>
                     </div>
                 </div>

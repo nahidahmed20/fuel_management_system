@@ -37,7 +37,7 @@
     <div class="container-fluid add-form-list">
         <div class="row">
             <div class="col-sm-12 mx-auto">
-                <div class="card shadow-lg">
+                <div class="card shadow-lg rounded-0">
                     <div class="card-header d-flex justify-content-between align-items-center flex-wrap" style="background-color: #27548A; color: #fff;">
                         <div class="header-title">
                             <h4 class="card-title mb-0">
@@ -46,7 +46,7 @@
                         </div>
                         <a href="{{ route('borrowers.index') }}" 
                         class="btn btn-sm d-flex justify-content-center align-items-center mt-2 mt-sm-0"
-                        style="background: linear-gradient(45deg, #36D1DC, #5B86E5); color: white; border: none; font-weight: 500; padding: 6px 12px; border-radius: 5px;">
+                        style="background: linear-gradient(45deg, #36D1DC, #5B86E5); color: white; border: none; font-weight: 500; padding: 6px 12px; border-radius: 0px;">
                             <i class="fas fa-arrow-left me-1"></i> Borrower List
                         </a>
                     </div>
@@ -56,25 +56,25 @@
                             @csrf
 
                             <div class="row">
-                                <div class="mb-3 col-md-6">
+                                <div class="mb-3 col-md-4">
                                     <label for="name" class="form-label">Borrower Name <span class="text-danger">*</span></label>
                                     <input type="text" name="name" class="form-control" placeholder="e.g. Nahid" required>
                                 </div>
 
-                                <div class="mb-3 col-md-6">
+                                <div class="mb-3 col-md-4">
                                     <label for="mobile" class="form-label">Mobile</label>
                                     <input type="text" name="mobile" class="form-control" placeholder="e.g. 017XXXXXXXX">
                                 </div>
 
-                                <div class="mb-3 col-md-12">
+                                <div class="mb-3 col-md-4">
                                     <label for="address" class="form-label">Address</label>
-                                    <textarea name="address" class="form-control" rows="3" placeholder="e.g. Chittagong, Bangladesh"></textarea>
+                                    <input name="address" class="form-control" rows="3" placeholder="e.g. Chittagong, Bangladesh">
                                 </div>
                             </div>
 
-                            <div class="d-flex justify-content-start">
-                                <button type="submit" class="btn text-white" style="background: linear-gradient(45deg, #0f9b8e, #129990); padding: 8px 16px; border-radius: 5px; border: none;">
-                                    Save Borrower
+                            <div class="d-flex justify-content-end">
+                                <button type="submit" class="btn text-white" style="background: linear-gradient(45deg, #0f9b8e, #129990); padding: 8px 16px; border-radius: 0px; border: none;">
+                                    Save 
                                 </button>
                             </div>
                         </form>

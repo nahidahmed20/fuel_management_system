@@ -28,31 +28,29 @@ Fuel Stock List
     .btn-back,
     .btn-edit,
     .btn-delete {
-        min-width: 60px;
         text-align: center;
         font-weight: 500;
         border: none;
         display: inline-flex;
         align-items: center;
         gap: 6px;
-        padding: 4px 10px;
-        border-radius: 5px;
-        font-size: 0.9rem;
+        padding: 7px 10px;
+        border-radius: 3px;
+        font-size: 16px;
         cursor: pointer;
         text-decoration: none;
         color: white;
     }
+    
 
     .btn-edit {
         background-color: #20c997;
-        color: white;
-        padding: 4px 10px;
     }
 
     .btn-delete {
         background-color: #e63946;
         color:white;
-        padding: 4px 10px;
+        padding: 7px 10px;
     }
 
     @media (max-width: 576px) {
@@ -96,7 +94,7 @@ Fuel Stock List
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-lg-12">
-                <div class="card shadow-sm border-0">
+                <div class="card shadow-sm rounded-0">
 
                     {{-- Main Header --}}
                     <div class="card-header-custom d-flex justify-content-between align-items-center flex-wrap mb-3">
@@ -106,7 +104,7 @@ Fuel Stock List
                         <a href="{{ route('fuel.stock.create') }}" 
                            class="btn btn-sm d-flex align-items-center"
                            style="background: linear-gradient(45deg, #36D1DC, #5B86E5); color: white; font-weight: 500; padding: 6px 12px; border-radius: 5px;">
-                            <i class="fas fa-plus-circle me-1"></i> Add Fuel Stock
+                            <i class="fas fa-plus-circle me-1"></i> Add 
                         </a>
                     </div>
 
@@ -179,7 +177,7 @@ Fuel Stock List
                                                     <div style="margin-right: 2px">
                                                         <a href="{{ route('fuel.stock.edit', $stock->id) }}"
                                                            class="btn btn-sm text-white btn-edit">
-                                                            <i class="fa fa-edit me-1"></i> Edit
+                                                            <i class="fa fa-edit me-1"></i>
                                                         </a>
                                                     </div>
 
@@ -187,7 +185,7 @@ Fuel Stock List
                                                         <form action="{{ route('fuel.stock.destroy', $stock->id) }}" method="GET" class="delete-form">
                                                             @csrf
                                                             <button type="submit" class="btn btn-sm text-white btn-delete">
-                                                                <i class="fa fa-trash me-1"></i> Delete
+                                                                <i class="fa fa-trash me-1"></i>
                                                             </button>
                                                         </form>
                                                     </div>

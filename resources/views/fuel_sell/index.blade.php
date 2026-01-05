@@ -28,16 +28,15 @@
     .btn-back,
     .btn-edit,
     .btn-delete {
-        min-width: 60px;
         text-align: center;
         font-weight: 500;
         border: none;
         display: inline-flex;
         align-items: center;
         gap: 6px;
-        padding: 4px 10px;
-        border-radius: 5px;
-        font-size: 0.9rem;
+        padding: 7px 10px;
+        border-radius: 3px;
+        font-size: 16px;
         cursor: pointer;
         text-decoration: none;
         color: white;
@@ -46,13 +45,13 @@
     .btn-edit {
         background-color: #20c997;
         color: white;
-        padding: 4px 10px;
+        padding: 7px 10px;
     }
 
     .btn-delete {
         background-color: #e63946;
         color: white;
-        padding: 4px 10px;
+        padding: 7px 10px;
     }
 
     @media (max-width: 576px) {
@@ -198,7 +197,7 @@
                                                     <div>
                                                         <a href="{{ route('fuel.sell.edit', $sell->id) }}" 
                                                            class="btn btn-sm btn-edit">
-                                                           <i class="fa fa-edit me-1"></i> Edit
+                                                           <i class="fa fa-edit me-1"></i> 
                                                         </a>
                                                     </div>
 
@@ -206,7 +205,7 @@
                                                         <form action="{{ route('fuel.sell.destroy', $sell->id) }}" method="GET" style="display:inline-block;">
                                                             @csrf
                                                             <button type="submit" class="btn btn-sm btn-delete delete-btn">
-                                                                <i class="fa fa-trash me-1"></i> Delete
+                                                                <i class="fa fa-trash me-1"></i> 
                                                             </button>
                                                         </form>
                                                     </div>

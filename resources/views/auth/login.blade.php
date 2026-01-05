@@ -48,7 +48,7 @@
         }
 
         .login-logo span {
-            color: #ffffff;
+            color: #00f7c9;
             font-weight: 600;
         }
 
@@ -64,7 +64,7 @@
         /* Form Inputs */
         .form-label {
             font-weight: 600;
-            color: #fff;
+            color: #00f7c9;
         }
 
         .form-control {

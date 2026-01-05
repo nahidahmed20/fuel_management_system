@@ -52,7 +52,7 @@
                         <a href="{{ route('borrowers.create') }}" 
                            class="btn btn-sm d-flex align-items-center" 
                            style="background: linear-gradient(45deg, #36D1DC, #5B86E5); color: white; border: none; font-weight: 500; padding: 6px 12px; border-radius: 5px;">
-                            <i class="fas fa-plus-circle me-1"></i> Add Borrower
+                            <i class="fas fa-plus-circle me-1"></i> Add 
                         </a>
                     </div>
 

@@ -40,7 +40,7 @@
     <div class="container-fluid add-form-list">
         <div class="row">
             <div class="col-sm-12 mx-auto">
-                <div class="card shadow-lg">
+                <div class="card shadow-lg rounded-0">
                     <div class="card-header d-flex justify-content-between align-items-center flex-wrap" style="background-color: #27548A; color: #fff;">
                         <div class="header-title">
                            <h4 class="card-title mb-0">
@@ -49,7 +49,7 @@
                         </div>
                         <a href="{{ route('fuel-type.index') }}" 
                         class="btn btn-sm d-flex align-items-center justify-content-center mt-2 mt-sm-0"
-                        style="background: linear-gradient(45deg, #36D1DC, #5B86E5); color: white; border: none; font-weight: 500; padding: 6px 12px; border-radius: 5px;">
+                        style="background: linear-gradient(45deg, #36D1DC, #5B86E5); color: white; border: none; font-weight: 500; padding: 6px 12px; border-radius: 0px;">
                             <i class="fas fa-arrow-left me-1"></i> Fuel Type List
                         </a>
 
@@ -57,16 +57,20 @@
                     <div class="card-body">
                         <form action="{{ route('fuel-type.update', $fuelType->id) }}" method="POST">
                             @csrf
-                            <div class="mb-3">
+                            <div class="mb-3 col-md-4">
                                 <label for="name" class="form-label">Fuel Name</label>
                                 <input type="text" name="name" class="form-control" value="{{ $fuelType->name }}" required>
                                 
                             </div>
-                            <button type="submit" 
-                                    class="btn text-white fw-semibold d-flex align-items-center justify-content-center"
-                                    style="background: linear-gradient(45deg, #0f9b8e, #129990); padding: 8px 16px; border-radius: 5px; border: none;">
-                                 Update Type
-                            </button>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="d-flex justify-content-md-end justify-content-center mt-3">
+                                        <button type="submit" class="btn text-white px-4" style="background-color:#129990;border-radius: 0px;">
+                                            Update
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
 
                         </form>
                     </div>

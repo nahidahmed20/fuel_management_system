@@ -33,7 +33,7 @@
     <div class="container-fluid add-form-list">
         <div class="row justify-content-center">
             <div class="col-sm-12">
-                <div class="card shadow-lg mb-4">
+                <div class="card shadow-lg mb-4 rounded-0">
                     
                     {{-- Header --}}
                     <div class="card-header d-flex justify-content-between align-items-center flex-wrap card-header-center-sm"
@@ -46,8 +46,8 @@
 
                         <a href="{{ route('fuel.sell.index') }}" 
                         class="btn btn-sm d-flex justify-content-center align-items-center"
-                        style="background: linear-gradient(45deg, #36D1DC, #5B86E5); color: white; border: none; font-weight: 500; padding: 6px 12px; border-radius: 5px;">
-                            <i class="fas fa-arrow-left me-1"></i> Fuel Sell List
+                        style="background: linear-gradient(45deg, #36D1DC, #5B86E5); color: white; border: none; font-weight: 500; padding: 6px 12px; border-radius: 0px;">
+                            <i class="fas fa-arrow-left me-1"></i> Sell List
                         </a>
                     </div>
 
@@ -58,7 +58,7 @@
 
                             <div class="row g-3 mb-3">
                                 <!-- Fuel Type -->
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <label for="fuel_type_id" class="form-label">Fuel Type</label>
                                     <select name="fuel_type_id" id="fuel_type_id" class="form-control" required>
                                         <option value="">Select</option>
@@ -69,7 +69,7 @@
                                 </div>
 
                                 <!-- Nozzle -->
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <label for="nozzle_id" class="form-label">Nozzle</label>
                                     <select name="nozzle_id" id="nozzle_id" class="form-control" required>
                                         <option value="">Select Nozzle</option>
@@ -77,19 +77,19 @@
                                 </div>
 
                                 <!-- Quantity -->
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <label for="quantity" class="form-label">Quantity (L)</label>
                                     <input type="number" step="any" name="quantity" id="quantity" class="form-control" required>
                                 </div>
 
                                 <!-- Total Sell -->
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <label for="total_sell" class="form-label">Total Price (৳)</label>
                                     <input type="text" name="total_sell" id="total_sell" class="form-control" readonly>
                                 </div>
 
                                 <!-- Date -->
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <label for="date" class="form-label">Date</label>
                                     <input type="date" name="date" id="date" class="form-control" required>
                                 </div>
@@ -98,10 +98,12 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-2 justify-content-md-start justify-content-center">
-                                    <button type="submit" class="btn text-white w-100" style="background-color: #129990;">
-                                      + Fuel Sell
-                                    </button>
+                                <div class="col-12">
+                                    <div class="d-flex justify-content-md-end justify-content-center mt-3">
+                                        <button type="submit" class="btn text-white px-4" style="background-color:#129990;border-radius: 0px;">
+                                            Save
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </form>

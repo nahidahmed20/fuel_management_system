@@ -26,16 +26,15 @@ Fuel Type List
     .btn-back,
     .btn-edit,
     .btn-delete {
-        min-width: 60px;
         text-align: center;
         font-weight: 500;
         border: none;
         display: inline-flex;
         align-items: center;
         gap: 6px;
-        padding: 4px 10px;
-        border-radius: 5px;
-        font-size: 0.9rem;
+        padding: 7px 10px;
+        border-radius: 3px;
+        font-size: 16px;
         cursor: pointer;
         text-decoration: none;
         color: white;
@@ -44,13 +43,13 @@ Fuel Type List
     .btn-edit {
         background-color: #20c997 ;
         color: white;
-        padding: 4px 10px;
+        padding: 7px 10px;
     }
 
     .btn-delete {
         background-color: #e63946 ;
         color: white;
-        padding: 4px 10px;
+        padding: 7px 10px;
     }
 
     @media (max-width: 576px) {
@@ -110,7 +109,7 @@ Fuel Type List
 
                         <a href="{{ route('fuel-type.create') }}" 
                         class="btn btn-sm d-flex align-items-center" 
-                        style="background: linear-gradient(45deg, #36D1DC, #5B86E5); color: white; border: none; font-weight: 500; padding: 6px 12px; border-radius: 5px;">
+                        style="background: linear-gradient(45deg, #36D1DC, #5B86E5); color: white; border: none; font-weight: 500; padding: 6px 12px; border-radius: 0px;">
                             <i class="fas fa-plus-circle me-1"></i> Add Fuel Type
                         </a>
 
@@ -137,14 +136,14 @@ Fuel Type List
                                                 <div class="action-btn-group d-flex flex-row  justify-content-center " style="margin-right: 10px;">
                                                     <div style="margin-right: 2px">
                                                         <a href="{{ route('fuel-type.edit', $fuel->id) }}"
-                                                        class="btn btn-sm text-white btn-edit "><i class="fa fa-edit me-1"></i> Edit</a>
+                                                        class="btn btn-sm text-white btn-edit "><i class="fa fa-edit me-1"></i> </a>
                                                     </div>
 
                                                     <div style="margin-left: 2px">
                                                         <form action="{{ route('fuel-type.destroy', $fuel->id) }}" method="GET" class="delete-form">
                                                             @csrf
                                                             <button type="submit" class="btn btn-sm text-white btn-delete" style="background-color: #dc3545;">
-                                                                <i class="fa fa-trash me-1"></i> Delete
+                                                                <i class="fa fa-trash me-1"></i> 
                                                             </button>
                                                         </form>
                                                     </div>

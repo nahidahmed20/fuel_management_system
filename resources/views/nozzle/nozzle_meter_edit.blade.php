@@ -39,7 +39,7 @@
     <div class="container-fluid add-form-list">
         <div class="row">
             <div class="col-sm-12 mx-auto">
-                <div class="card shadow-lg">
+                <div class="card shadow-lg rounded-0">
                     <div class="card-header d-flex justify-content-between align-items-center flex-wrap" style="background-color: #27548A; color: #fff;">
                         <div class="header-title">
                             <h4 class="card-title mb-0">
@@ -49,7 +49,7 @@
                         <a href="{{ route('nozzle.meter.index') }}" 
                             class="btn btn-sm d-flex align-items-center justify-content-center mt-2 mt-sm-0"
                             style="background: linear-gradient(45deg, #36D1DC, #5B86E5); color: white; border: none; font-weight: 500; padding: 6px 12px; border-radius: 5px;">
-                            <i class="fas fa-arrow-left me-1"></i> Back to Nozzle Meters
+                            <i class="fas fa-arrow-left me-1"></i>Nozzle Meters
                         </a>
                     </div>
 
@@ -95,11 +95,15 @@
                                 </div>
                             </div>
 
-                            <button type="submit" 
-                                class="btn text-white fw-semibold d-flex align-items-center justify-content-center"
-                                style="background: linear-gradient(45deg, #0f9b8e, #129990); padding: 8px 16px; border-radius: 5px; border: none;">
-                                 <i class="fas fa-save me-1"></i> Update Meter
-                            </button>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="d-flex justify-content-md-end justify-content-center mt-3">
+                                        <button type="submit" class="btn text-white px-4" style="background-color:#129990;border-radius: 0px;">
+                                            Update
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
                         </form>
                     </div>
                 </div>

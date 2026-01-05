@@ -253,5 +253,7 @@
     .iq-submenu {
         padding-left: 1rem;
     }
+
+    
 </style>
 @stack('style')
