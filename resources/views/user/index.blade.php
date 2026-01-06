@@ -5,89 +5,98 @@ User List
 @endsection
 
 @push('style')
-<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
-<style>
-    .card-header-custom {
-        background-color: #27548A;
+    <style>
+    /* Table header */
+    #roleTable thead {
+        background-color: #002c7c;
         color: #fff;
-        padding: 1rem 1.5rem;
-        border-top-left-radius: 0.375rem;
-        border-top-right-radius: 0.375rem;
+        font-weight: 600;
     }
 
-    .card-header-custom h4 {
-        margin: 0;
+    /* Alternate row colors */
+    #roleTable tbody tr:nth-child(even) {
+        background-color: #f2f7ff;
+    }
+
+    #roleTable tbody tr:hover {
+        background-color: #d0e1ff;
+    }
+
+    /* Role name text */
+    .role-name {
         font-weight: 500;
+        color: #1e3d7b;
     }
 
-    #user_table tbody tr:hover {
-        background-color: #f8f9fa;
-    }
-
-    .btn-edit,
-    .btn-delete {
-        min-width: 60px;
-        text-align: center;
-        font-weight: 500;
-        border: none;
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        padding: 4px 10px;
-        border-radius: 5px;
-        font-size: 0.9rem;
-        cursor: pointer;
+    /* Permission badges */
+    .badge-permission {
+        background-color: #17a2b8; /* info color */
         color: white;
+        margin-bottom: 3px;
+        padding: 3px 7px;
+        font-size: 12px;
+        border-radius: 4px;
     }
 
-    .btn-edit {
-        background-color: #20c997;
+    /* Action buttons */
+    .action-btn-group .edit-btn {
+        background-color: #0d6efd;
+        color: #fff;
+        border-radius: 0;
+        padding: 4px 8px;
     }
 
-    .btn-delete {
-        background-color: #e63946;
+    .action-btn-group .edit-btn:hover {
+        background-color: #0b5ed7;
+        color: #fff;
     }
 
-    @media (max-width: 576px) {
-        .card-header-custom {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 0.75rem;
-        }
-
-        .card-header-custom h4 {
-            font-size: 1.1rem;
-        }
-
-        .table th,
-        .table td {
-            font-size: 0.9rem;
-        }
-
-        .btn-sm {
-            padding: 0.3rem 0.5rem;
-            font-size: 0.8rem;
-        }
-
-        .table-responsive {
-            overflow-x: auto;
-        }
-
-        .action-btn-group {
-            flex-direction: column !important;
-            align-items: stretch !important;
-        }
-
-        .action-btn-group > div {
-            width: 100%;
-        }
-
-        .btn-edit,
-        .btn-delete {
-            width: 100% !important;
-        }
+    .action-btn-group .delete-btn {
+        background-color: #dc3545;
+        color: #fff;
+        border-radius: 0;
+        padding: 4px 8px;
     }
-</style>
+
+    .action-btn-group .delete-btn:hover {
+        background-color: #bb2d3b;
+        color: #fff;
+    }
+
+    /* Center align icons */
+    .action-btn-group .btn i {
+        font-size: 14px;
+    }
+    /* Status badges */
+    .badge {
+        display: inline-block;
+        font-size: 0.85rem;
+        font-weight: 500;
+        padding: 0.25rem 0.6rem;
+        border-radius: 12px;
+        color: #fff;
+        text-align: center;
+        min-width: 70px;
+    }
+
+    /* Active status */
+    .badge-active {
+        background-color: #28a745; /* green */
+        color:white !important;
+    }
+
+    /* Inactive status */
+    .badge-inactive {
+        background-color: #dc3545; /* red */
+    }
+
+    /* Optional: hover effect */
+    .badge:hover {
+        opacity: 0.85;
+        transition: 0.3s;
+    }
+    </style>
+
 @endpush
 
 @section('content')
@@ -135,31 +144,46 @@ User List
                                         <td>{{ $user->email }}</td>
                                         <td>{{ $user->phone }}</td>
                                         <td>{{ ucfirst($user->role) }}</td>
-                                        <td>
+                                        <td class="text-center">
                                             @if($user->status == 1)
-                                                <span class="badge bg-success">Active</span>
+                                                <span class="badge badge-active">Active</span>
                                             @else
-                                                <span class="badge bg-danger">Inactive</span>
+                                                <span class="badge badge-inactive">Inactive</span>
                                             @endif
                                         </td>
-                                        <td class="text-center">
-                                            <div class="action-btn-group d-flex justify-content-center">
-                                                <div style="margin-right: 2px;">
-                                                    <a href="{{ route('user.edit', $user->slug) }}" class="btn btn-sm btn-edit">
-                                                        <i class="fa fa-edit me-1"></i> Edit
-                                                    </a>
-                                                </div>
-                                                
-                                                <div style="margin-left: 2px;">
-                                                    <form action="{{ route('user.delete', $user->id) }}" method="GET" class="delete-form">
-                                                        @csrf
-                                                        <button class="btn btn-sm btn-delete">
-                                                            <i class="fa fa-trash me-1"></i> Delete
-                                                        </button>
-                                                    </form>
-                                                </div>
+                                        <td>
+                                            <div class="action-btn-group d-flex justify-content-center gap-1">
+
+                                                {{-- Edit --}}
+                                                <a href="{{ route('user.edit', $user->slug) }}"
+                                                class="btn btn-sm btn-edit text-white"
+                                                data-id="{{ $user->id }}"
+                                                data-name="{{ $user->name }}"
+                                                data-email="{{ $user->email }}"
+                                                data-phone="{{ $user->phone }}"
+                                                data-role="{{ $user->role }}"
+                                                data-status="{{ $user->status }}">
+                                                    <i class="fa fa-edit"></i> 
+                                                </a>
+
+                                                {{-- Delete --}}
+                                                <button type="button"
+                                                        class="btn btn-sm btn-delete"
+                                                        data-id="{{ $user->id }}">
+                                                    <i class="fa fa-trash"></i> 
+                                                </button>
+
+                                                {{-- Hidden delete form --}}
+                                                <form id="delete-form-{{ $user->id }}"
+                                                    action="{{ route('user.delete', $user->id) }}"
+                                                    method="POST" style="display:none;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                </form>
+
                                             </div>
                                         </td>
+
                                     </tr>
                                     @empty
                                     <tfoot>
@@ -201,26 +225,28 @@ User List
     });
 </script>
 <script>
-    $(document).ready(function(){
-        $('.btn-delete').on('click', function (e) {
-            e.preventDefault();
-            const form = $(this).closest('form');
+$(document).ready(function(){
+    $('.btn-delete').on('click', function (e) {
+        e.preventDefault();
+        const userId = $(this).data('id');
+        const form = $('#delete-form-' + userId);
 
-            Swal.fire({
-                title: 'Are you sure?',
-                text: "This action cannot be undone!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#d33',
-                cancelButtonColor: '#3085d6',
-                confirmButtonText: 'Yes, delete it!',
-                cancelButtonText: 'Cancel'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    form.submit();
-                }
-            });
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "This action cannot be undone!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'Cancel'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                form.submit();
+            }
         });
     });
+});
 </script>
+
 @endpush

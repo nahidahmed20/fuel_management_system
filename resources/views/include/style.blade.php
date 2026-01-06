@@ -19,6 +19,88 @@
 
 <!-- DataTables CSS -->
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+
+<style>
+    .card-header-custom {
+        background-color: #27548A;
+        color: #fff;
+        padding: 1rem 1.5rem;
+        border-top-left-radius: 0.375rem;
+        border-top-right-radius: 0.375rem;
+    }
+
+    .card-header-custom h4 {
+        margin: 0;
+        font-weight: 500;
+    }
+
+    #fuel_stock tbody tr:hover {
+        background-color: #f8f9fa;
+    }
+
+    .btn-back,
+    .btn-edit,
+    .btn-delete {
+        text-align: center;
+        font-weight: 500;
+        border: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 7px 10px;
+        border-radius: 3px;
+        font-size: 16px;
+        cursor: pointer;
+        text-decoration: none;
+        color: white;
+    }
+    
+
+    .btn-edit {
+        background-color: #20c997;
+    }
+
+    .btn-delete {
+        background-color: #e63946;
+        color:white;
+        padding: 7px 10px;
+    }
+
+    @media (max-width: 576px) {
+        .card-header-custom {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+
+        .table th, .table td {
+            font-size: 0.9rem;
+        }
+
+        .btn-sm {
+            padding: 0.3rem 0.5rem;
+            font-size: 0.8rem;
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        .action-btn-group {
+            flex-direction: column !important;
+            align-items: stretch !important;
+        }
+
+        .action-btn-group > div {
+            width: 100%;
+        }
+
+        .btn-edit, .btn-delete {
+            width: 100% !important;
+        }
+    }
+</style>
 <style>
     /* Mobile-specific fix */
     @media (max-width: 768px) {
@@ -45,8 +127,7 @@
         display: block;
         z-index: 1000;
     }
-</style>
-<style>
+
     /* Pagination button spacing reduce */
     .dataTables_wrapper .dataTables_paginate .paginate_button {
         padding: 5px 0px !important;
@@ -68,9 +149,7 @@
         border: 0px solid #ddd !important;
         color: #333 !important;
     }
-</style>
 
-<style>
     .iq-sidebar {
         background-color: #2c3e50;
         color: #ecf0f1; 
@@ -179,8 +258,6 @@
         padding: 1rem !important;
     }
 
-</style>
-<style>
     .iq-top-navbar {
         background-color: #1f2d3d;
         border-bottom: 2px solid #00B4D8;
@@ -217,9 +294,6 @@
         font-size: 12px;
         padding: 2px 6px;
     }
-
-</style>
-<style>
     .iq-sidebar-menu a {
         display: flex;
         align-items: center;
@@ -253,7 +327,5 @@
     .iq-submenu {
         padding-left: 1rem;
     }
-
-    
 </style>
 @stack('style')

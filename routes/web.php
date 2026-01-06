@@ -271,7 +271,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/user/store',[UserController::class,'userStore'])->name('user.store');
     Route::get('/user/edit/{slug}',[UserController::class,'userEdit'])->name('user.edit');
     Route::post('/user/update/{id}',[UserController::class,'userUpdate'])->name('user.update');
-    Route::get('/user/delete/{id}',[UserController::class,'userDelete'])->name('user.delete');
+    Route::delete('/user/{id}', [UserController::class, 'userDelete'])->name('user.delete');
 
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
     Route::get('/profile/edit', [ProfileController::class, 'profileEdit'])->name('profile.edit');

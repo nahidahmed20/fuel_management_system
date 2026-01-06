@@ -157,7 +157,7 @@ textarea:focus::-webkit-input-placeholder {
 
 img {
 	display: inline-block;
-	max-width: 100%;
+	max-width: 50%;
 }
 
 i,
@@ -224,12 +224,14 @@ hr {
 	.section-padding {
 		padding: 100px 30px;
 	}
+	
 }
 
 @media only screen and (min-width: 576px) and (max-width: 767px) {
 	.section-padding {
 		padding: 50px 20px;
 	}
+
 }
 
 @media (max-width: 575px) {

@@ -21,7 +21,7 @@ class UserController extends Controller
     // Show create form
     public function userCreate()
     {
-        $roles = Role::all(); // <--- fetch all roles for assign
+        $roles = Role::all();
         return view('user.create', compact('roles'));
     }
 
@@ -32,7 +32,7 @@ class UserController extends Controller
             'name'          => 'required',
             'phone_number'  => 'required|unique:users,phone',
             'email'         => 'required|unique:users,email',
-            'role'          => 'required',  // role name from select
+            'role'          => 'nullable',  
             'password'      => 'required|min:8',
             'gender'        => 'required',
         ]);
@@ -83,7 +83,7 @@ class UserController extends Controller
             'name'          => 'required',
             'phone_number'  => 'required',
             'email'         => 'required',
-            'role'          => 'required',  // role select
+            'role'          => 'nullable',  // role select
             'gender'        => 'required',
             'password'      => 'nullable|min:8',
         ]);

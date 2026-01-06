@@ -10,14 +10,14 @@ class RoleController extends Controller
 {
     public function index()
     {
-        return view('roles.index', [
+        return view('role.index', [
             'roles' => Role::latest()->get()
         ]);
     }
 
     public function create()
     {
-        return view('roles.create', [
+        return view('role.create', [
             'permissions' => Permission::all()
         ]);
     }
@@ -37,7 +37,7 @@ class RoleController extends Controller
 
     public function edit(Role $role)
     {
-        return view('roles.edit', [
+        return view('role.edit', [
             'role' => $role,
             'permissions' => Permission::all()
         ]);
