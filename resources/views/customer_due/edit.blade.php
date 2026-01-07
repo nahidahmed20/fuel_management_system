@@ -137,7 +137,7 @@
                             </div>
 
                             <!-- Submit -->
-                            <<div class="row">
+                            <div class="row">
                                 <div class="col-12">
                                     <div class="d-flex justify-content-md-end justify-content-center mt-3">
                                         <button type="submit" class="btn text-white px-4" style="background-color:#129990;border-radius: 2px; padding: 4px;">

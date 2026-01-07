@@ -3,91 +3,39 @@
 @section('title')
 Loan Due Payments
 @endsection
-
 @push('style')
-<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
-<style>
-    .card-header-custom {
-        background-color: #27548A;
-        color: #fff;
-        padding: 1rem 1.5rem;
-        border-top-left-radius: 0.375rem;
-        border-top-right-radius: 0.375rem;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        flex-wrap: wrap;
-    }
-
-    .card-header-custom h4 {
-        margin: 0;
-        font-weight: 700;
-        font-size: 1.25rem;
-    }
-
-    #customer_due_payment tbody tr:hover {
-        background-color: #f8f9fa;
-    }
-
-    .btn-back,
-    .btn-edit,
-    .btn-delete {
-        min-width: 60px;
-        text-align: center;
-        font-weight: 500;
-        border: none;
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        padding: 4px 10px;
-        border-radius: 5px;
-        font-size: 0.9rem;
-        cursor: pointer;
-        text-decoration: none;
-        color: white;
-    }
-
-    .btn-back {
-        background: linear-gradient(45deg, #36D1DC, #5B86E5);
-    }
-    .btn-back:hover {
-        background: linear-gradient(45deg, #2bb3c9, #4d72d8);
-        color: #fff;
-        text-decoration: none;
-    }
-
-    .btn-edit {
-        background-color: #20c997;
-        color: white;
-        padding: 4px 10px;
-    }
-
-    .btn-delete {
-        background-color: #e63946;
-        padding: 4px 10px;
-        color: white;
-    }
-
-    @media (max-width: 576px) {
-        .card-header-custom {
-            flex-direction: column;
-            gap: 0.5rem;
+    <style>
+        /* Top control row flex */
+        .dataTables_wrapper .dataTables_length,
+        .dataTables_wrapper .dt-buttons,
+        .dataTables_wrapper .dataTables_filter {
+            display: inline-flex;
+            align-items: center;
         }
 
-        .btn-back,
-        .btn-edit,
-        .btn-delete {
-            width: 100% !important;
-            justify-content: center;
+        /* Wrapper top alignment */
+        .dataTables_wrapper .dataTables_length {
+            float: left;
         }
 
-        #customer_due_payment th,
-        #customer_due_payment td {
-            font-size: 0.85rem;
+        .dataTables_wrapper .dataTables_filter {
+            float: right;
         }
-    }
-</style>
+
+        /* Buttons in the middle */
+        .dataTables_wrapper .dt-buttons {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Button spacing */
+        .dataTables_wrapper .dt-buttons .dt-button {
+            margin: 0 5px;
+        }
+    </style>
 @endpush
+
 
 @section('content')
 <div class="content-page">
@@ -96,12 +44,15 @@ Loan Due Payments
             <div class="col-lg-12 mx-auto">
                 <div class="card shadow-sm border-0">
                     {{-- Header --}}
-                    <div class="card-header-custom">
-                        <h4 class="card-title mb-0">
+
+                    <div class="card-header-custom d-flex justify-content-between align-items-center mb-2 flex-wrap">
+                         <h4 class="card-title mb-0">
                             <i class="fa fa-money-bill-wave me-2"></i> Loan Due Payments
                         </h4>
-                        <a href="{{ route('borrowers.index') }}" class="btn btn-sm btn-back">
-                            <i class="fas fa-arrow-left me-1"></i> Back to Borrowers
+                        <a href="{{ route('borrowers.index') }}" 
+                           class="btn btn-sm d-flex align-items-center" 
+                           style="background: linear-gradient(45deg, #36D1DC, #5B86E5); color: white; border: none; font-weight: 500; padding: 6px 12px; border-radius: 5px;">
+                            <i class="fas fa-plus-circle me-1"></i> Back to Borrowers
                         </a>
                     </div>
 
@@ -129,7 +80,7 @@ Loan Due Payments
                                             <td>{{ $loanPayment->note ?? '-' }}</td>
                                             <td class="text-center">
                                                 <a href="{{ route('loan-payments.edit', $loanPayment->id) }}" class="btn btn-sm btn-edit">
-                                                    <i class="fa fa-edit"></i> Edit
+                                                    <i class="fa fa-edit"></i> 
                                                 </a>
                                             </td>
                                         </tr>
@@ -218,14 +169,18 @@ Loan Due Payments
 @endsection
 
 @push('script')
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
 <script>
     $(document).ready(function () {
+        
         $('#loan_due_payment').DataTable({
             responsive: true,
             pagingType: 'simple_numbers',
+            dom: 'lBfrtip',
+            buttons: [
+                { extend: 'excelHtml5', className: 'btn btn-sm btn-success', text: '<i class="fa fa-file-excel"></i> Excel' },
+                { extend: 'pdfHtml5', className: 'btn btn-sm btn-danger', text: '<i class="fa fa-file-pdf"></i> PDF' },
+                { extend: 'print', className: 'btn btn-sm btn-primary', text: '<i class="fa fa-print"></i> Print' }
+            ],
             language: {
                 paginate: {
                     previous: "<i class='fas fa-angle-left'></i>",

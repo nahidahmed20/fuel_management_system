@@ -3,8 +3,37 @@
 @section('title')
     Mobil Sell List
 @endsection
+@push('style')
+    <style>
+        .dataTables_wrapper .dataTables_length,
+        .dataTables_wrapper .dt-buttons,
+        .dataTables_wrapper .dataTables_filter {
+            display: inline-flex;
+            align-items: center;
+        }
 
+        /* Wrapper top alignment */
+        .dataTables_wrapper .dataTables_length {
+            float: left;
+        }
 
+        .dataTables_wrapper .dataTables_filter {
+            float: right;
+        }
+
+        /* Buttons in the middle */
+        .dataTables_wrapper .dt-buttons {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Button spacing */
+        .dataTables_wrapper .dt-buttons .dt-button {
+            margin: 0 5px;
+        }
+    </style>
+@endpush
 @section('content')
 <div class="content-page">
     <div class="container-fluid">
@@ -72,12 +101,23 @@
 @endsection
 
 @push('script')
-<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
 <script>
     $(document).ready(function () {
         $('#outTable').DataTable({
-            responsive: true
+            responsive: true,
+            pagingType: 'simple_numbers',
+            dom: 'lBfrtip', 
+            buttons: [
+                { extend: 'excelHtml5', className: 'btn btn-sm btn-success', text: '<i class="fa fa-file-excel"></i> Excel' },
+                { extend: 'pdfHtml5', className: 'btn btn-sm btn-danger', text: '<i class="fa fa-file-pdf"></i> PDF' },
+                { extend: 'print', className: 'btn btn-sm btn-primary', text: '<i class="fa fa-print"></i> Print' }
+            ],
+            language: {
+                paginate: {
+                    previous: "<i class='fas fa-angle-left'></i>",
+                    next: "<i class='fas fa-angle-right'></i>"
+                }
+            }
         });
     });
 </script>

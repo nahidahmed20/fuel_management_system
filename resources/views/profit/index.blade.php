@@ -5,7 +5,6 @@ Profit Report
 @endsection
 
 @push('style')
-<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
 <style>
     .fuel-card {
         background: linear-gradient(135deg, #f0f4ff, #ffffff);

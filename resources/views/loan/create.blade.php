@@ -4,25 +4,68 @@
 
 @push('style')
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
 <style>
+    /* Card Style (SAME) */
     .card {
-        box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1),
-                    4px 8px 20px rgba(0, 0, 0, 0.05);
+        border-radius: 10px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+        border: none;
     }
 
+    .card-header {
+        background: linear-gradient(45deg, #27548A, #1e3c72);
+        color: #fff;
+        border-radius: 10px 10px 0 0;
+    }
+
+    /* Select2 (SAME) */
     .select2-container--default .select2-selection--single {
-        height: 46px;
-        padding: 8px 6px;
+        height: 39px;
+        padding: 6px 10px;
+        border-radius: 0px;
         border: 1px solid #ced4da;
+    }
+
+    .select2-selection__rendered {
+        line-height: 28px !important;
+    }
+
+    .select2-selection__arrow {
+        height: 100% !important;
+    }
+
+    /* Total Box (SAME) */
+    .total-due-box {
+        background: #f8f9fa;
         border-radius: 8px;
+        padding: 10px 15px;
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #dc3545;
+        border-left: 4px solid #dc3545;
     }
 
-    .select2-container--default .select2-selection--single .select2-selection__rendered {
-        line-height: 1.5;
+    /* Buttons (SAME) */
+    .btn-gradient {
+        background: linear-gradient(45deg, #0f9b8e, #129990);
+        color: #fff;
+        border: none;
+        padding: 8px 18px;
+        border-radius: 6px;
+        transition: all .3s ease;
     }
 
-    .select2-container--default .select2-selection--single .select2-selection__arrow {
-        height: 100%;
+    .btn-gradient:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+    }
+
+    .btn-list {
+        background: linear-gradient(45deg, #36D1DC, #5B86E5);
+        color: #fff;
+        border-radius: 6px;
+        font-size: 13px;
     }
 
     @media (max-width: 576px) {
@@ -31,18 +74,10 @@
             align-items: flex-start !important;
         }
 
-        .card-header .btn {
+        .card-header a {
+            width: 100%;
             margin-top: 10px;
-            width: 100%;
             text-align: center;
-        }
-
-        .card-title {
-            font-size: 1.1rem;
-        }
-
-        button[type="submit"] {
-            width: 100%;
         }
     }
 </style>
@@ -52,70 +87,90 @@
 <div class="content-page">
     <div class="container-fluid add-form-list">
         <div class="row">
-            <div class="col-sm-12 mx-auto">
-                <div class="card shadow-lg">
-                    <div class="card-header d-flex justify-content-between align-items-center flex-wrap" style="background-color: #27548A; color: #fff;">
-                        <div class="header-title">
-                            <h4 class="card-title mb-0">
-                                <i class="fas fa-coins me-2"></i> Add New Loan
-                            </h4>
-                        </div>
-                        <a href="{{ route('loans.index') }}" 
-                        class="btn btn-sm d-flex justify-content-center align-items-center mt-2 mt-sm-0"
-                        style="background: linear-gradient(45deg, #36D1DC, #5B86E5); color: white; border: none; font-weight: 500; padding: 6px 12px; border-radius: 5px;">
-                            <i class="fas fa-arrow-left me-1"></i> Loan List
+            <div class="col-lg-12 mx-auto">
+
+                <div class="card">
+                    <!-- Header -->
+                    <div class="card-header d-flex justify-content-between align-items-center" style="background:#046064">
+                        <h4 class="mb-0">
+                            <i class="fas fa-coins me-2"></i> Add Loan
+                        </h4>
+                        <a href="{{ route('loans.index') }}" class="btn btn-sm btn-list">
+                            <i class="fas fa-list me-1"></i> Loan List
                         </a>
                     </div>
 
+                    <!-- Body -->
                     <div class="card-body">
                         <form action="{{ route('loans.store') }}" method="POST">
                             @csrf
 
-                            <div class="row">
-                                <div class="mb-3 col-md-6">
-                                    <label for="borrower_id" class="form-label">Select Borrower <span class="text-danger">*</span></label>
+                            <div class="row g-3">
+                                <!-- Borrower -->
+                                <div class="col-md-4">
+                                    <label class="form-label fw-semibold">
+                                        Borrower <span class="text-danger">*</span>
+                                    </label>
                                     <select name="borrower_id" id="borrower_id" class="form-control select2" required>
-                                        <option value="">-- Select Borrower --</option>
+                                        <option value="">Select Borrower</option>
                                         @foreach($borrowers as $borrower)
-                                            <option value="{{ $borrower->id }}">{{ $borrower->name }}</option>
+                                            <option value="{{ $borrower->id }}">
+                                                {{ $borrower->name }}
+                                            </option>
                                         @endforeach
                                     </select>
                                 </div>
 
-                                <div class="mb-3 col-md-6">
-                                    <label class="form-label">Total Borrow (৳) <span class="text-danger">*</span></label>
-                                    <div id="total_borrow" style="font-weight: bold; font-size: 1.2rem; color: #d9534f;">
+                                <!-- Total Borrow -->
+                                <div class="col-md-4">
+                                    <label class="form-label fw-semibold">Total Borrow</label>
+                                    <div id="total_borrow" class="total-due-box">
                                         ৳ 0.00
                                     </div>
                                 </div>
 
-                                <div class="mb-3 col-md-6">
-                                    <label for="amount" class="form-label">Amount (৳) <span class="text-danger">*</span></label>
-                                    <input type="number" name="amount" class="form-control" step="any" required>
+                                <!-- Amount -->
+                                <div class="col-md-4">
+                                    <label class="form-label fw-semibold">
+                                        Amount (৳) <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="number" name="amount" step="any" class="form-control" required>
                                 </div>
 
-                                <div class="mb-3 col-md-6">
-                                    <label for="loan_date" class="form-label">Loan Date <span class="text-danger">*</span></label>
+                                <!-- Loan Date -->
+                                <div class="col-md-4">
+                                    <label class="form-label fw-semibold">
+                                        Loan Date <span class="text-danger">*</span>
+                                    </label>
                                     <input type="date" name="loan_date" id="loan_date" class="form-control" required>
                                 </div>
 
-                                <div class="mb-3 col-md-12">
-                                    <label for="note" class="form-label">Note</label>
-                                    <textarea name="note" class="form-control" rows="2" placeholder="Optional note..."></textarea>
+                                <!-- Note -->
+                                <div class="col-md-8">
+                                    <label class="form-label fw-semibold">Note</label>
+                                    <textarea name="note" rows="2" class="form-control" placeholder="Optional note..."></textarea>
                                 </div>
                             </div>
 
-                            <div class="d-flex justify-content-start">
-                                <button type="submit" class="btn text-white" style="background: linear-gradient(45deg, #0f9b8e, #129990); padding: 8px 16px; border-radius: 5px; border: none;">
-                                    Save Loan
-                                </button>
+                            <!-- Submit -->
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="d-flex justify-content-md-end justify-content-center mt-3">
+                                        <button type="submit"
+                                            class="btn text-white px-4"
+                                            style="background-color:#129990;border-radius:2px;padding:4px;">
+                                            Save
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
+
                         </form>
                     </div>
                 </div>
+
             </div>
         </div>
-        <!-- Page end -->
     </div>
 </div>
 @endsection
@@ -123,39 +178,37 @@
 @push('script')
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-<script>
-    $(document).ready(function () {
-        $('.select2').select2({
-            placeholder: "-- Select Borrower --",
-            allowClear: true,
-            width: '100%'
-        });
 
-        // Set today's date
-        let today = new Date().toISOString().split('T')[0];
-        $('#loan_date').val(today);
-    });
-</script>
 <script>
-    $(document).ready(function() {
-        $('#borrower_id').on('change', function() {
-            var borrowerId = $(this).val();
-            if (borrowerId) {
-                $.ajax({
-                    url: "{{ route('borrower_due.getTotalDue') }}", 
-                    method: 'GET',
-                    data: { borrower_id: borrowerId },
-                    success: function(response) {
-                        $('#total_borrow').text('৳ ' + parseFloat(response.total_borrow).toFixed(2));
-                    },
-                    error: function() {
-                        $('#total_borrow').text('Error fetching due');
-                    }
-                });
-            } else {
-                $('#total_borrow').text('৳ 0.00');
-            }
-        });
+$(function () {
+
+    $('.select2').select2({
+        placeholder: "Select Borrower",
+        allowClear: true,
+        width: '100%'
     });
+
+    // Set today date
+    $('#loan_date').val(new Date().toISOString().split('T')[0]);
+
+    // Fetch total borrow
+    $('#borrower_id').on('change', function () {
+        let borrowerId = $(this).val();
+
+        if (!borrowerId) {
+            $('#total_borrow').text('৳ 0.00');
+            return;
+        }
+
+        $.get("{{ route('borrower_due.getTotalDue') }}", { borrower_id: borrowerId })
+            .done(function (res) {
+                $('#total_borrow').text('৳ ' + parseFloat(res.total_borrow).toFixed(2));
+            })
+            .fail(function () {
+                $('#total_borrow').text('Error fetching due');
+            });
+    });
+
+});
 </script>
 @endpush

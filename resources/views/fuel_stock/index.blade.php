@@ -5,87 +5,37 @@ Fuel Stock List
 @endsection
 
 @push('style')
-<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
-
 <style>
-    .card-header-custom {
-        background-color: #27548A;
-        color: #fff;
-        padding: 1rem 1.5rem;
-        border-top-left-radius: 0.375rem;
-        border-top-right-radius: 0.375rem;
+    table.dataTable{
+        border-radius: 0px;
     }
-
-    .card-header-custom h4 {
-        margin: 0;
-        font-weight: 500;
-    }
-
-    #fuel_stock tbody tr:hover {
-        background-color: #f8f9fa;
-    }
-
-    .btn-back,
-    .btn-edit,
-    .btn-delete {
-        text-align: center;
-        font-weight: 500;
-        border: none;
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        padding: 7px 10px;
-        border-radius: 3px;
-        font-size: 16px;
-        cursor: pointer;
-        text-decoration: none;
-        color: white;
-    }
-    
-
-    .btn-edit {
-        background-color: #20c997;
-    }
-
-    .btn-delete {
-        background-color: #e63946;
-        color:white;
-        padding: 7px 10px;
-    }
-
-    @media (max-width: 576px) {
-        .card-header-custom {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 0.75rem;
+    .dataTables_wrapper .dataTables_length,
+        .dataTables_wrapper .dt-buttons,
+        .dataTables_wrapper .dataTables_filter {
+            display: inline-flex;
+            align-items: center;
         }
 
-        .table th, .table td {
-            font-size: 0.9rem;
+        /* Wrapper top alignment */
+        .dataTables_wrapper .dataTables_length {
+            float: left;
         }
 
-        .btn-sm {
-            padding: 0.3rem 0.5rem;
-            font-size: 0.8rem;
+        .dataTables_wrapper .dataTables_filter {
+            float: right;
         }
 
-        .table-responsive {
-            overflow-x: auto;
+        /* Buttons in the middle */
+        .dataTables_wrapper .dt-buttons {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
         }
 
-        .action-btn-group {
-            flex-direction: column !important;
-            align-items: stretch !important;
+        /* Button spacing */
+        .dataTables_wrapper .dt-buttons .dt-button {
+            margin: 0 5px;
         }
-
-        .action-btn-group > div {
-            width: 100%;
-        }
-
-        .btn-edit, .btn-delete {
-            width: 100% !important;
-        }
-    }
 </style>
 @endpush
 
@@ -103,7 +53,7 @@ Fuel Stock List
                         </h4>
                         <a href="{{ route('fuel.stock.create') }}" 
                            class="btn btn-sm d-flex align-items-center"
-                           style="background: linear-gradient(45deg, #36D1DC, #5B86E5); color: white; font-weight: 500; padding: 6px 12px; border-radius: 5px;">
+                           style="background: linear-gradient(45deg, #36D1DC, #5B86E5); color: white; font-weight: 500; padding: 4px 12px; border-radius: 2px;">
                             <i class="fas fa-plus-circle me-1"></i> Add 
                         </a>
                     </div>
@@ -139,7 +89,7 @@ Fuel Stock List
 
                     {{-- Fuel Stocks Table --}}
                     <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center mb-3 px-3 py-2 rounded" style="background: linear-gradient(90deg, #2193b0, #6dd5ed); color: white;">
+                        <div class="d-flex justify-content-between align-items-center mb-3 px-3 py-2 " style="background: linear-gradient(90deg, #2193b0, #6dd5ed); color: white;">
                             <h5 class="fw-bold mb-0">
                                 <i class="bi bi-table me-2"></i> Fuel Stocks Table
                             </h5>
@@ -215,21 +165,24 @@ Fuel Stock List
 @endsection
 
 @push('script')
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
 
 <script>
     $(document).ready(function () {
         $('#fuelStockTable').DataTable({
             responsive: true,
             pagingType: 'simple_numbers',
+            dom: 'lBfrtip', 
+            buttons: [
+                { extend: 'excelHtml5', className: 'btn btn-sm btn-success', text: '<i class="fa fa-file-excel"></i> Excel' },
+                { extend: 'pdfHtml5', className: 'btn btn-sm btn-danger', text: '<i class="fa fa-file-pdf"></i> PDF' },
+                { extend: 'print', className: 'btn btn-sm btn-primary', text: '<i class="fa fa-print"></i> Print' }
+            ],
             language: {
                 paginate: {
                     previous: "<i class='fas fa-angle-left'></i>",
                     next: "<i class='fas fa-angle-right'></i>"
                 }
-            },
+            }
         });
     });
 

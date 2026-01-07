@@ -87,8 +87,8 @@
                         </div>
                         <a href="{{ route('loans.index') }}" 
                         class="btn btn-sm d-flex justify-content-center align-items-center mt-2 mt-sm-0"
-                        style="background: linear-gradient(45deg, #36D1DC, #5B86E5); color: white; border: none; font-weight: 500; padding: 6px 12px; border-radius: 5px;">
-                            <i class="fas fa-arrow-left me-1"></i> Back to Loans
+                        style="background: linear-gradient(45deg, #36D1DC, #5B86E5); color: white; border: none; font-weight: 500; padding: 6px 12px; border-radius: 2px;">
+                             Loans
                         </a>
                     </div>
 
@@ -98,24 +98,32 @@
                             @csrf
                             <input type="hidden" name="borrower_id" value="{{ $borrower_id }}">
 
-                            <div class="mb-3">
-                                <label class="form-label">Amount (৳) <span class="text-danger">*</span></label>
-                                <input type="number" name="amount" step="any" class="form-control" required placeholder="e.g. 5000">
+                            <div class="row">
+                                <div class="mb-3 col-md-4">
+                                    <label class="form-label">Amount (৳) <span class="text-danger">*</span></label>
+                                    <input type="number" name="amount" step="any" class="form-control" required placeholder="e.g. 5000">
+                                </div>
+
+                                <div class="mb-3 col-md-4">
+                                    <label class="form-label">Payment Date <span class="text-danger">*</span></label>
+                                    <input type="date" name="payment_date" class="form-control" required>
+                                </div>
+
+                                <div class="mb-3 col-md-4">
+                                    <label class="form-label">Note</label>
+                                    <input name="note" class="form-control"  placeholder="Optional note..."></input>
+                                </div>
                             </div>
 
-                            <div class="mb-3">
-                                <label class="form-label">Payment Date <span class="text-danger">*</span></label>
-                                <input type="date" name="payment_date" class="form-control" required>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="d-flex justify-content-md-end justify-content-center mt-3">
+                                        <button type="submit" class="btn text-white" style="background-color:#129990;border-radius: 2px;">
+                                            Create
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
-
-                            <div class="mb-3">
-                                <label class="form-label">Note</label>
-                                <textarea name="note" class="form-control" rows="3" placeholder="Optional note..."></textarea>
-                            </div>
-
-                            <button type="submit">
-                                <i class="fas fa-check-circle me-1"></i> Save Payment
-                            </button>
                         </form>
                     </div>
                 </div>

@@ -170,17 +170,19 @@
 @endsection
 
 @push('script')
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
     $(document).ready(function () {
+
         $('#nozzle_list').DataTable({
             responsive: true,
             pagingType: 'simple_numbers',
-            ordering: true,
+            dom: 'lBfrtip', 
+            buttons: [
+                { extend: 'excelHtml5', className: 'btn btn-sm btn-success', text: '<i class="fa fa-file-excel"></i> Excel' },
+                { extend: 'pdfHtml5', className: 'btn btn-sm btn-danger', text: '<i class="fa fa-file-pdf"></i> PDF' },
+                { extend: 'print', className: 'btn btn-sm btn-primary', text: '<i class="fa fa-print"></i> Print' }
+            ],
             language: {
                 paginate: {
                     previous: "<i class='fas fa-angle-left'></i>",
@@ -190,8 +192,7 @@
         });
 
     });
-</script>
-<script>
+
     $(document).ready(function(){
         $(".delete-btn").on("click", function (event) {
             event.preventDefault();

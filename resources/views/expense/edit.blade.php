@@ -48,8 +48,8 @@
                         </div>
                         <a href="{{ route('expense.index') }}"
                         class="btn btn-sm d-flex align-items-center justify-content-center mt-2 mt-sm-0"
-                        style="background: linear-gradient(45deg, #36D1DC, #5B86E5); color: white; border: none; font-weight: 500; padding: 6px 12px; border-radius: 5px;">
-                            <i class="fas fa-arrow-left me-1"></i> Expense List
+                        style="background: linear-gradient(45deg, #36D1DC, #5B86E5); color: white; border: none; font-weight: 500; padding: 6px 12px; border-radius: 2px;">
+                             Expense List
                         </a>
                     </div>
 
@@ -73,19 +73,19 @@
                                     <label for="date" class="form-label">Date <span class="text-danger">*</span></label>
                                     <input type="date" name="date" class="form-control" value="{{ $expense->date }}" required>
                                 </div>
+                                <div class="mb-3 col-md-6">
+                                    <label for="note" class="form-label">Note</label>
+                                    <textarea name="note" class="form-control" rows="2">{{ $expense->note }}</textarea>
+                                </div>
                             </div>
-
-                            <div class="mb-3">
-                                <label for="note" class="form-label">Note</label>
-                                <textarea name="note" class="form-control" rows="2">{{ $expense->note }}</textarea>
-                            </div>
-
-                            <div class="d-flex justify-content-start">
-                                <button type="submit"
-                                    class="btn text-white fw-semibold d-flex align-items-center justify-content-center"
-                                        style="background: linear-gradient(45deg, #0f9b8e, #129990); padding: 8px 16px; border-radius: 5px; border: none;">
-                                    Update Expense
-                                </button>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="d-flex justify-content-md-end justify-content-center mt-3">
+                                        <button type="submit" class="btn text-white px-4" style="background-color:#129990;border-radius: 2px; padding: 4px;">
+                                            Update
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </form>
                     </div>

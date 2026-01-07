@@ -5,79 +5,35 @@ Account Transactions
 @endsection
 
 @push('style')
-<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
-<style>
-    .card-header-custom {
-        background-color: #0d6efd;
-        color: #fff;
-        padding: 1rem 1.5rem;
-        border-top-left-radius: 0.375rem;
-        border-top-right-radius: 0.375rem;
-    }
-
-    .card-header-custom h4 {
-        margin: 0;
-        font-weight: 500;
-    }
-
-    #account_table tbody tr:hover {
-        background-color: #f8f9fa;
-    }
-
-    .btn-edit {
-        background-color: #20c997;
-        color: white;
-        padding: 4px 10px;
-        border-radius: 5px;
-    }
-
-    .btn-delete {
-        background-color: #e63946;
-        color: white;
-        padding: 4px 10px;
-        border-radius: 5px;
-    }
-
-    @media (max-width: 576px) {
-        .card-header-custom {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 0.75rem;
+    <style>
+        .dataTables_wrapper .dataTables_length,
+        .dataTables_wrapper .dt-buttons,
+        .dataTables_wrapper .dataTables_filter {
+            display: inline-flex;
+            align-items: center;
         }
 
-        .card-header-custom h4 {
-            font-size: 1.1rem;
+        /* Wrapper top alignment */
+        .dataTables_wrapper .dataTables_length {
+            float: left;
         }
 
-        .table th,
-        .table td {
-            font-size: 0.9rem;
+        .dataTables_wrapper .dataTables_filter {
+            float: right;
         }
 
-        .btn-sm {
-            padding: 0.3rem 0.5rem;
-            font-size: 0.8rem;
+        /* Buttons in the middle */
+        .dataTables_wrapper .dt-buttons {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
         }
 
-        .table-responsive {
-            overflow-x: auto;
+        /* Button spacing */
+        .dataTables_wrapper .dt-buttons .dt-button {
+            margin: 0 5px;
         }
-
-        .action-btn-group {
-            flex-direction: column !important;
-            align-items: stretch !important;
-        }
-
-        .action-btn-group > div {
-            width: 100%;
-        }
-
-        .btn-edit,
-        .btn-delete {
-            width: 100% !important;
-        }
-    }
-</style>
+    </style>
 @endpush
 
 @section('content')
@@ -163,15 +119,19 @@ Account Transactions
 @endsection
 
 @push('script')
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
 
 <script>
     $(document).ready(function () {
+
         $('#account_table').DataTable({
             responsive: true,
             pagingType: 'simple_numbers',
+            dom: 'lBfrtip', 
+            buttons: [
+                { extend: 'excelHtml5', className: 'btn btn-sm btn-success', text: '<i class="fa fa-file-excel"></i> Excel' },
+                { extend: 'pdfHtml5', className: 'btn btn-sm btn-danger', text: '<i class="fa fa-file-pdf"></i> PDF' },
+                { extend: 'print', className: 'btn btn-sm btn-primary', text: '<i class="fa fa-print"></i> Print' }
+            ],
             language: {
                 paginate: {
                     previous: "<i class='fas fa-angle-left'></i>",

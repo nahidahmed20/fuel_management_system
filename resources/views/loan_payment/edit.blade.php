@@ -88,8 +88,8 @@
                         </div>
                         <a href="{{ route('customers.index') }}" 
                         class="btn btn-sm d-flex align-items-center justify-content-center mt-2 mt-sm-0"
-                        style="background: linear-gradient(45deg, #36D1DC, #5B86E5); color: white; border: none; font-weight: 500; padding: 6px 12px; border-radius: 5px;">
-                            <i class="fas fa-arrow-left me-1"></i> Back to Customers
+                        style="background: linear-gradient(45deg, #36D1DC, #5B86E5); color: white; border: none; font-weight: 500; padding: 6px 12px; border-radius: 2px;">
+                            Customers
                         </a>
 
                     </div>
@@ -101,31 +101,37 @@
                             @method('PUT')
                             <input type="hidden" name="borrower_id" value="{{ $loanPayment->borrower_id }}">
 
-                            <div class="mb-3">
-                                <label class="form-label">Amount (৳) <span class="text-danger">*</span></label>
-                                <input type="number" name="amount" step="any" class="form-control" required
-                                       value="{{ old('amount', $loanPayment->amount) }}" placeholder="e.g. 5000">
-                            </div>
+                            <div class="row">
+                                 <div class="mb-3 col-md-4">
+                                    <label class="form-label">Amount (৳) <span class="text-danger">*</span></label>
+                                    <input type="number" name="amount" step="any" class="form-control" required
+                                        value="{{ old('amount', $loanPayment->amount) }}" placeholder="e.g. 5000">
+                                </div>
 
-                            <div class="mb-3">
-                                <label class="form-label">Payment Date <span class="text-danger">*</span></label>
-                                <input type="date" name="payment_date" class="form-control" required
-                                       value="{{ old('payment_date', $loanPayment->payment_date) }}">
-                            </div>
+                                <div class="mb-3 col-md-4">
+                                    <label class="form-label">Payment Date <span class="text-danger">*</span></label>
+                                    <input type="date" name="payment_date" class="form-control" required
+                                        value="{{ old('payment_date', $loanPayment->payment_date) }}">
+                                </div>
 
-                            <div class="mb-3">
-                                <label class="form-label">Note</label>
-                                <textarea name="note" class="form-control" rows="3" placeholder="Optional note...">{{ old('note', $loanPayment->note) }}</textarea>
+                                <div class="mb-3 col-md-4">
+                                    <label class="form-label">Note</label>
+                                    <input name="note" class="form-control"  value="{{ old('note', $loanPayment->note) }}" placeholder="Optional note..."></input>
+                                </div>
                             </div>
 
                             {{-- <button type="submit">
                                  Update Payment
                             </button> --}}
-                            <button type="submit" 
-                                    class="btn text-white fw-semibold d-flex align-items-center justify-content-center"
-                                    style="background: linear-gradient(45deg, #0f9b8e, #129990); padding: 8px 16px; border-radius: 5px; border: none;">
-                                 Update Type
-                            </button>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="d-flex justify-content-md-end justify-content-center mt-3">
+                                        <button type="submit" class="btn text-white" style="background-color:#129990;border-radius: 2px;padding: 6px 10px;">
+                                            Update
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
                         </form>
                     </div>
                 </div>

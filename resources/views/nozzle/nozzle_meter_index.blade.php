@@ -5,64 +5,34 @@
 @endsection
 
 @push('style')
-<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
-
 <style>
-    .card {
-        box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1),
-                    4px 8px 20px rgba(0, 0, 0, 0.05);
-    }
-
-    .btn-edit {
-        background-color: #20c997;
-        color: white;
-        padding: 7px 10px;
-    }
-
-    .btn-delete {
-        background-color: #e63946;
-        color: white;
-        padding: 7px 10px;
-    }
-    .btn-back,
-    .btn-edit,
-    .btn-delete {
-        text-align: center;
-        font-weight: 500;
-        border: none;
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        padding: 7px 10px;
-        border-radius: 3px;
-        font-size: 16px;
-        cursor: pointer;
-        text-decoration: none;
-        color: white;
-    }
-
-    @media (max-width: 576px) {
-        .card-header {
-            flex-direction: column;
-            align-items: flex-start !important;
+    .dataTables_wrapper .dataTables_length,
+        .dataTables_wrapper .dt-buttons,
+        .dataTables_wrapper .dataTables_filter {
+            display: inline-flex;
+            align-items: center;
         }
 
-        .card-header .btn {
-            margin-top: 10px;
-            width: 100%;
-            text-align: center;
+        /* Wrapper top alignment */
+        .dataTables_wrapper .dataTables_length {
+            float: left;
         }
 
-        .card-title {
-            font-size: 1.1rem;
+        .dataTables_wrapper .dataTables_filter {
+            float: right;
         }
 
-        button[type="submit"] {
-            width: 100%;
+        /* Buttons in the middle */
+        .dataTables_wrapper .dt-buttons {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
         }
-    }
-    
 
+        /* Button spacing */
+        .dataTables_wrapper .dt-buttons .dt-button {
+            margin: 0 5px;
+        }
 </style>
 @endpush
 
@@ -80,7 +50,7 @@
                         </div>
                         <a href="{{ route('nozzle.meter.create') }}" 
                             class="btn btn-sm d-flex align-items-center justify-content-center mt-2 mt-sm-0"
-                            style="background: linear-gradient(45deg, #36D1DC, #5B86E5); color: white; border: none; font-weight: 500; padding: 6px 12px; border-radius: 5px;">
+                            style="background: linear-gradient(45deg, #36D1DC, #5B86E5); color: white; border: none; font-weight: 500; padding: 6px 12px; border-radius: 2px;">
                             <i class="fas fa-plus-circle me-1"></i> Add 
                         </a>
                     </div>
@@ -151,15 +121,20 @@
 @endsection
 
 @push('script')
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+
 
 <script>
     $(document).ready(function () {
+
         $('#meterTable').DataTable({
             responsive: true,
             pagingType: 'simple_numbers',
+            dom: 'lBfrtip', 
+            buttons: [
+                { extend: 'excelHtml5', className: 'btn btn-sm btn-success', text: '<i class="fa fa-file-excel"></i> Excel' },
+                { extend: 'pdfHtml5', className: 'btn btn-sm btn-danger', text: '<i class="fa fa-file-pdf"></i> PDF' },
+                { extend: 'print', className: 'btn btn-sm btn-primary', text: '<i class="fa fa-print"></i> Print' }
+            ],
             language: {
                 paginate: {
                     previous: "<i class='fas fa-angle-left'></i>",

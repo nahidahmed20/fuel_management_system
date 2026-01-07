@@ -60,8 +60,8 @@
                         </div>
                         <a href="{{ route('nozzle.meter.index') }}" 
                             class="btn btn-sm d-flex align-items-center justify-content-center mt-2 mt-sm-0"
-                            style="background: linear-gradient(45deg, #36D1DC, #5B86E5); color: white; border: none; font-weight: 500; padding: 6px 12px; border-radius: 0px;">
-                            <i class="fas fa-arrow-left me-1"></i>Nozzle list
+                            style="background: linear-gradient(45deg, #36D1DC, #5B86E5); color: white; border: none; font-weight: 500; padding: 6px 12px; border-radius: 2px;">
+                            Nozzle list
                         </a>
                     </div>
                     
@@ -106,7 +106,7 @@
                             <div class="row">
                                 <div class="col-12">
                                     <div class="d-flex justify-content-md-end justify-content-center mt-3">
-                                        <button type="submit" class="btn text-white px-4" style="background-color:#129990;border-radius: 0px;">
+                                        <button type="submit" class="btn text-white px-4" style="background-color:#129990;border-radius: 2px; padding:5px 13px">
                                             Save
                                         </button>
                                     </div>

@@ -39,7 +39,7 @@
     <div class="container-fluid add-form-list">
         <div class="row">
             <div class="col-sm-12 mx-auto">
-                <div class="card shadow-lg">
+                <div class="card shadow-lg rounded-0">
                     <div class="card-header d-flex justify-content-between align-items-center flex-wrap" style="background-color: #27548A; color: #fff;">
                         <div class="header-title">
                             <h4 class="card-title mb-0">
@@ -48,8 +48,8 @@
                         </div>
                         <a href="{{ route('expense.index') }}" 
                         class="btn btn-sm d-flex justify-content-center align-items-center mt-2 mt-sm-0"
-                        style="background: linear-gradient(45deg, #36D1DC, #5B86E5); color: white; border: none; font-weight: 500; padding: 6px 12px; border-radius: 5px;">
-                            <i class="fas fa-arrow-left me-1"></i> Expense List
+                        style="background: linear-gradient(45deg, #36D1DC, #5B86E5); color: white; border: none; font-weight: 500; padding: 6px 12px; border-radius: 2px;">
+                            Expense List
                         </a>
                     </div>
 
@@ -71,17 +71,20 @@
                                     <label for="date" class="form-label">Date <span class="text-danger">*</span></label>
                                     <input type="date" name="date" id="date" class="form-control" value="{{ date('Y-m-d') }}" required>
                                 </div>
+                                <div class="mb-3 col-md-6">
+                                    <label for="note" class="form-label">Note</label>
+                                    <textarea name="note" id="note" class="form-control" rows="2" placeholder="Optional note..."></textarea>
+                                </div>
                             </div>
 
-                            <div class="mb-3">
-                                <label for="note" class="form-label">Note</label>
-                                <textarea name="note" id="note" class="form-control" rows="2" placeholder="Optional note..."></textarea>
-                            </div>
-
-                            <div class="justify-content-md-start justify-content-center">
-                                <button type="submit" class="btn text-white" style="background: linear-gradient(45deg, #0f9b8e, #129990); padding: 8px 16px; border-radius: 5px; border: none;">
-                                    Save Expense
-                                </button>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="d-flex justify-content-md-end justify-content-center mt-3">
+                                        <button type="submit" class="btn text-white px-4" style="background-color:#129990;border-radius: 2px; padding: 4px;">
+                                            Save
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                             
                         </form>

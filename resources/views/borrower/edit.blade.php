@@ -46,8 +46,8 @@
                         </div>
                         <a href="{{ route('borrowers.index') }}" 
                         class="btn btn-sm d-flex justify-content-center align-items-center mt-2 mt-sm-0"
-                        style="background: linear-gradient(45deg, #36D1DC, #5B86E5); color: white; border: none; font-weight: 500; padding: 6px 12px; border-radius: 0px;">
-                            <i class="fas fa-arrow-left me-1"></i> Borrower List
+                        style="background: linear-gradient(45deg, #36D1DC, #5B86E5); color: white; border: none; font-weight: 500; padding: 6px 12px; border-radius: 2px;">
+                             Borrower List
                         </a>
                     </div>
 
@@ -73,10 +73,14 @@
                                 </div>
                             </div>
 
-                            <div class="d-flex justify-content-lg-end">
-                                <button type="submit" class="btn text-white" style="background: linear-gradient(45deg, #0f9b8e, #129990); padding: 8px 16px; border-radius: 0px; border: none;">
-                                    Update 
-                                </button>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="d-flex justify-content-md-end justify-content-center mt-3">
+                                        <button type="submit" class="btn text-white" style="background-color:#129990;border-radius: 2px;">
+                                            Update
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </form>
                     </div>

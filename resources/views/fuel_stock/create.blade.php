@@ -46,7 +46,7 @@
 
                         <a href="{{ route('fuel.stock.index') }}" 
                         class="btn btn-sm d-flex justify-content-center align-items-center"
-                        style="background: linear-gradient(45deg, #36D1DC, #5B86E5); color: white; border: none; font-weight: 500; padding: 6px 12px; border-radius: 0px;">
+                        style="background: linear-gradient(45deg, #36D1DC, #5B86E5); color: white; border: none; font-weight: 500; padding: 6px 12px; border-radius: 2px;">
                             <i class="fas fa-arrow-left me-1"></i> Fuel Stock List
                         </a>
                     </div>
@@ -109,7 +109,7 @@
                             <div class="row">
                                 <div class="col-12">
                                     <div class="d-flex justify-content-md-end justify-content-center mt-3">
-                                        <button type="submit" class="btn text-white px-4" style="background-color:#129990;border-radius: 0px;">
+                                        <button type="submit" class="btn text-white px-4" style="background-color:#129990;border-radius: 2px;">
                                             Add Stock
                                         </button>
                                     </div>
