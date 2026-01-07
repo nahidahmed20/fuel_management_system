@@ -48,8 +48,8 @@
                         </div>
                         <a href="{{ route('mobilOut.index') }}"
                         class="btn btn-sm d-flex justify-content-center align-items-center mt-2 mt-sm-0"
-                        style="background: linear-gradient(45deg, #36D1DC, #5B86E5); color: white; font-weight: 500; padding: 6px 12px; border-radius: 5px;">
-                            <i class="fas fa-arrow-left me-1"></i> Sell List
+                        style="background: linear-gradient(45deg, #36D1DC, #5B86E5); color: white; font-weight: 500; padding: 6px 12px; border-radius: 2px;">
+                      Sell List
                         </a>
                     </div>
                     <div class="card-body">
@@ -57,19 +57,19 @@
                             @csrf
 
                             <div class="row g-3">
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <label for="name" class="form-label">Product</label>
                                     <input type="text" name="name" class="form-control" value="{{ $out->name }}" readonly required>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <label for="quantity" class="form-label">Quantity (L)</label>
                                     <input type="number" name="quantity" id="quantity" step="any" class="form-control" value="{{ $out->quantity }}" required>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <label for="total_sell_display" class="form-label">Total Sell (৳)</label>
                                     <input type="text" id="total_sell_display" class="form-control" value="{{ $out->total_sell }}" readonly>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <label for="date" class="form-label">Date</label>
                                     <input type="date" name="date" class="form-control" value="{{ $out->date }}" required>
                                 </div>
@@ -79,10 +79,11 @@
                             <input type="hidden" name="total_sell" id="total_sell" value="{{ $out->total_sell }}">
                             <input type="hidden" name="total_buy" id="total_buy" value="{{ $out->total_buy }}">
 
-                            <button type="submit" class="btn mt-4 text-white"
-                                style="background: linear-gradient(45deg, #ff6a00, #ee0979); padding: 8px 16px; border-radius: 5px; border: none;">
-                                Update Sell
-                            </button>
+                            <div class="d-flex justify-content-end">
+                                <button type="submit" class="btn mt-4 text-white" style="background: linear-gradient(45deg, #0f9b8e, #129990); padding: 6px 16px; border-radius: 2px; border: none;">
+                                    Update
+                                </button>
+                            </div>
                         </form>
                     </div>
                 </div>

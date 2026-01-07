@@ -39,7 +39,7 @@
     <div class="container-fluid add-form-list">
         <div class="row">
             <div class="col-sm-12 mx-auto">
-                <div class="card shadow-lg">
+                <div class="card shadow-lg rounded-0">
                     <div class="card-header d-flex justify-content-between align-items-center flex-wrap" style="background-color: #27548A; color: #fff;">
                         <div class="header-title">
                             <h4 class="card-title mb-0">
@@ -48,39 +48,39 @@
                         </div>
                         <a href="{{ route('mobil.index') }}" 
                         class="btn btn-sm d-flex align-items-center mt-2 mt-sm-0"
-                        style="background: linear-gradient(45deg, #36D1DC, #5B86E5); color: white; border: none; font-weight: 500; padding: 6px 12px; border-radius: 5px;">
-                            <i class="fas fa-arrow-left me-1"></i> Mobil List
+                        style="background: linear-gradient(45deg, #36D1DC, #5B86E5); color: white; border: none; font-weight: 500; padding: 6px 12px; border-radius: 0px;">
+                            Mobil List
                         </a>
                     </div>
                     <div class="card-body">
                         <form action="{{ route('mobil.stock.store') }}" method="POST">
                             @csrf
                             <div class="row g-3">
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <label for="name" class="form-label">Product Name</label>
                                     <input type="text" name="name" value="Mobil" class="form-control" readonly required>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <label for="quantity" class="form-label">Quantity (L)</label>
                                     <input type="number" name="quantity" step="any" class="form-control" placeholder="e.g. 100" required>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <label for="buying_price" class="form-label">Buying Price (৳)</label>
                                     <input type="number" name="buying_price" step="any" class="form-control" placeholder="e.g. 85" required>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <label for="selling_price" class="form-label">Selling Price (৳)</label>
                                     <input type="number" name="selling_price" step="any" class="form-control" placeholder="e.g. 95" required>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <label for="date" class="form-label">Date</label>
                                     <input type="date" name="date" class="form-control" required>
                                 </div>
                             </div>
 
-                            <div class="d-flex justify-content-start">
-                                <button type="submit" class="btn mt-4 text-white" style="background: linear-gradient(45deg, #0f9b8e, #129990); padding: 8px 16px; border-radius: 5px; border: none;">
-                                    + Add Stock
+                            <div class="d-flex justify-content-end">
+                                <button type="submit" class="btn mt-4 text-white" style="background: linear-gradient(45deg, #0f9b8e, #129990); padding: 6px 16px; border-radius: 0px; border: none;">
+                                    Add
                                 </button>
                             </div>
                         </form>

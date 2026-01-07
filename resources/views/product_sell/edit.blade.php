@@ -8,10 +8,10 @@
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <style>
     .select2-container--default .select2-selection--single {
-        height: 46px;
-        padding: 6px 12px;
+        height: 38px;
+        padding: 4px 12px;
         border: 1px solid #ced4da;
-        border-radius: 6px;
+        border-radius: 2px;
     }
 
     .card {
@@ -56,15 +56,15 @@
                         </div>
                         <a href="{{ route('product.sales.index') }}" 
                            class="btn btn-sm d-flex justify-content-center align-items-center mt-2 mt-sm-0"
-                           style="background: linear-gradient(45deg, #36D1DC, #5B86E5); color: white; border: none; font-weight: 500; padding: 6px 12px; border-radius: 5px;">
-                            <i class="fas fa-arrow-left me-1"></i> Back to Sell List
+                           style="background: linear-gradient(45deg, #36D1DC, #5B86E5); color: white; border: none; font-weight: 500; padding: 6px 12px; border-radius: 2px;">
+                           Sell List
                         </a>
                     </div>
                     <div class="card-body">
                         <form action="{{ route('product.sales.update', $sale->id) }}" method="POST">
                             @csrf
                             <div class="row g-3">
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <label for="stockOutProduct" class="form-label fw-bold text-dark">Select Product</label>
                                     <select name="product_id" id="stockOutProduct" class="form-select select2" required>
                                         <option value="" disabled>-- Select Product --</option>
@@ -84,17 +84,17 @@
                                     </select>
                                 </div>
 
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <label for="stockOutQty" class="form-label fw-bold text-dark">Quantity</label>
                                     <input type="number" step="any" name="quantity" id="stockOutQty" class="form-control" value="{{ $sale->quantity }}" required>
                                 </div>
 
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <label for="stockOutTotal" class="form-label fw-bold text-dark">Total Sell (৳)</label>
                                     <input type="text" id="stockOutTotal" class="form-control" value="{{ $sale->total_price }}" readonly>
                                 </div>
 
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <label for="stockOutDate" class="form-label fw-bold text-dark">Date</label>
                                     <input type="date" name="date" id="stockOutDate" class="form-control" value="{{ $sale->date }}" required>
                                 </div>
@@ -104,10 +104,9 @@
                             <input type="hidden" name="total_price" id="hiddenTotalSell" value="{{ $sale->total_price }}">
                             <input type="hidden" name="total_buy" id="stockOutTotalBuy" value="{{ $sale->total_buy }}">
 
-                            <div class="mt-4 text-end">
-                                <button type="submit" class="btn text-white"
-                                    style="background: linear-gradient(45deg, #FFA17F, #00223E); padding: 8px 16px; border-radius: 5px; border: none;">
-                                    <i class="fas fa-save me-1"></i> Update Sell
+                            <div class="d-flex justify-content-end">
+                                <button type="submit" class="btn mt-4 text-white" style="background: linear-gradient(45deg, #0f9b8e, #129990); padding: 6px 16px; border-radius: 2px; border: none;">
+                                    Update
                                 </button>
                             </div>
                         </form>

@@ -37,7 +37,7 @@
     <div class="container-fluid add-form-list">
         <div class="row">
             <div class="col-sm-12 mx-auto">
-                <div class="card shadow-lg">
+                <div class="card shadow-lg rounded-0">
                     <div class="card-header d-flex justify-content-between align-items-center flex-wrap" style="background-color: #27548A; color: #fff;">
                         <div class="header-title">
                             <h4 class="card-title mb-0">
@@ -46,8 +46,8 @@
                         </div>
                         <a href="{{ route('customers.index') }}" 
                         class="btn btn-sm d-flex justify-content-center align-items-center mt-2 mt-sm-0"
-                        style="background: linear-gradient(45deg, #36D1DC, #5B86E5); color: white; border: none; font-weight: 500; padding: 6px 12px; border-radius: 5px;">
-                            <i class="fas fa-arrow-left me-1"></i> Customer List
+                        style="background: linear-gradient(45deg, #36D1DC, #5B86E5); color: white; border: none; font-weight: 500; padding: 6px 12px; border-radius: 2px;">
+                             Customer List
                         </a>
                     </div>
 
@@ -55,24 +55,32 @@
                         <form action="{{ route('customers.store') }}" method="POST">
                             @csrf
 
-                            <div class="mb-3">
-                                <label for="name" class="form-label">Customer Name <span class="text-danger">*</span></label>
-                                <input type="text" name="name" class="form-control" placeholder="e.g. John Doe" required>
+                            <div class="row">
+                                <div class="mb-3 col-md-4">
+                                    <label for="name" class="form-label">Customer Name <span class="text-danger">*</span></label>
+                                    <input type="text" name="name" class="form-control" placeholder="e.g. John Doe" required>
+                                </div>
+
+                                <div class="mb-3 col-md-4">
+                                    <label for="mobile" class="form-label">Mobile</label>
+                                    <input type="text" name="mobile" class="form-control" placeholder="e.g. 017XXXXXXXX">
+                                </div>
+
+                                <div class="mb-3 col-md-4">
+                                    <label for="address" class="form-label">Address</label>
+                                    <input name="address" class="form-control" rows="3" placeholder="e.g. Dhaka, Bangladesh"></input>
+                                </div>
                             </div>
 
-                            <div class="mb-3">
-                                <label for="mobile" class="form-label">Mobile</label>
-                                <input type="text" name="mobile" class="form-control" placeholder="e.g. 017XXXXXXXX">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="d-flex justify-content-md-end justify-content-center mt-3">
+                                        <button type="submit" class="btn text-white px-4" style="background-color:#129990;border-radius: 2px; padding: 4px;">
+                                            Save
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
-
-                            <div class="mb-3">
-                                <label for="address" class="form-label">Address</label>
-                                <textarea name="address" class="form-control" rows="3" placeholder="e.g. Dhaka, Bangladesh"></textarea>
-                            </div>
-
-                            <button type="submit" class="btn text-white" style="background: linear-gradient(45deg, #0f9b8e, #129990); padding: 8px 16px; border-radius: 5px; border: none;">
-                                Save Customer
-                            </button>
                         </form>
                     </div>
                 </div>

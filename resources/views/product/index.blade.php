@@ -4,65 +4,6 @@
    Product List
 @endsection
 
-@push('style')
-<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
-<style>
-    .card {
-        box-shadow: 2px 4px 10px rgba(0,0,0,0.1),
-                    4px 8px 20px rgba(0,0,0,0.05);
-    }
-    .btn-edit {
-        background: #20c997;
-        color: white;
-        padding: 4px 10px;
-    }
-
-    .btn-delete {
-        background: #e63946;
-        color: white;
-        padding: 4px 10px;
-    }
-    .btn-back,
-    .btn-edit,
-    .btn-delete {
-        min-width: 60px;
-        text-align: center;
-        font-weight: 500;
-        border: none;
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        padding: 4px 10px;
-        border-radius: 5px;
-        font-size: 0.9rem;
-        cursor: pointer;
-        text-decoration: none;
-        color: white;
-    }
-
-    @media (max-width: 576px) {
-        .card-header {
-            flex-direction: column;
-            align-items: flex-start !important;
-        }
-
-        .card-header .btn {
-            margin-top: 10px;
-            width: 100%;
-            text-align: center;
-        }
-
-        .card-title {
-            font-size: 1.1rem;
-        }
-
-        button[type="submit"] {
-            width: 100%;
-        }
-    }
-</style>
-@endpush
-
 @section('content')
 
 <div class="content-page">
@@ -76,8 +17,8 @@
                         </h4>
                         <a href="{{ route('product.create') }}" 
                            class="btn btn-sm d-flex justify-content-center align-items-center mt-2 mt-sm-0"
-                           style="background: linear-gradient(45deg, #36D1DC, #5B86E5); color: white; border: none; font-weight: 500; padding: 6px 12px; border-radius: 5px;">
-                            <i class="fas fa-plus me-1"></i> Add New Product
+                           style="background: linear-gradient(45deg, #36D1DC, #5B86E5); color: white; border: none; font-weight: 500; padding: 6px 12px; border-radius: 2px;">
+                            <i class="fas fa-plus me-1"></i> Add
                         </a>
                     </div>
                     <div class="card-body">
@@ -98,12 +39,12 @@
                                             <td>{{ $product->name }}</td>
                                             <td class="text-center">
                                                 <a href="{{ route('product.edit', $product->id) }}" class="btn btn-sm btn-edit me-1">
-                                                    <i class="fas fa-edit"></i> Edit
+                                                    <i class="fas fa-edit"></i> 
                                                 </a>
                                                 <form action="{{ route('product.destroy', $product->id) }}" method="GET" class="d-inline delete-form">
                                                     @csrf
                                                     <button type="submit" class="btn btn-sm btn-delete">
-                                                        <i class="fas fa-trash-alt"></i> Delete
+                                                        <i class="fas fa-trash-alt"></i> 
                                                     </button>
                                                 </form>
                                             </td>

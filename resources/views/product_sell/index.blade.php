@@ -4,64 +4,7 @@
    Product Sell List
 @endsection
 
-@push('style')
-<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
-<style>
-    .card {
-        box-shadow: 2px 4px 10px rgba(0,0,0,0.1),
-                    4px 8px 20px rgba(0,0,0,0.05);
-    }
-    .btn-edit {
-        background: #20c997;
-        color: white;
-        padding: 4px 10px;
-    }
 
-    .btn-delete {
-        background: #e63946;
-        color: white;
-        padding: 4px 10px;
-    }
-    .btn-back,
-    .btn-edit,
-    .btn-delete {
-        min-width: 60px;
-        text-align: center;
-        font-weight: 500;
-        border: none;
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        padding: 4px 10px;
-        border-radius: 5px;
-        font-size: 0.9rem;
-        cursor: pointer;
-        text-decoration: none;
-        color: white;
-    }
-
-    @media (max-width: 576px) {
-        .card-header {
-            flex-direction: column;
-            align-items: flex-start !important;
-        }
-
-        .card-header .btn {
-            margin-top: 10px;
-            width: 100%;
-            text-align: center;
-        }
-
-        .card-title {
-            font-size: 1.1rem;
-        }
-
-        button[type="submit"] {
-            width: 100%;
-        }
-    }
-</style>
-@endpush
 
 @section('content')
 
@@ -76,28 +19,47 @@
                         </h4>
                         <a href="{{ route('product.sales.create') }}" 
                            class="btn btn-sm d-flex justify-content-center align-items-center mt-2 mt-sm-0"
-                           style="background: linear-gradient(45deg, #36D1DC, #5B86E5); color: white; border: none; font-weight: 500; padding: 6px 12px; border-radius: 5px;">
-                            <i class="fas fa-plus me-1"></i> Add New Sell
+                           style="background: linear-gradient(45deg, #36D1DC, #5B86E5); color: white; border: none; font-weight: 500; padding: 6px 12px; border-radius: 2px;">
+                             Add Sell
                         </a>
                     </div>
                     <div class="mt-3">
-                        <h5 class="mb-3"><i class="fas fa-chart-line me-2"></i> Summary</h5>
-                        <div class="mt-3">
-                            <form method="GET" action="{{ route('product.summary') }}" class="row g-2 mb-4">
-                                <div class="col-md-3">
-                                    <input type="date" name="start_date" class="form-control form-control-sm" 
-                                        value="{{ request('start_date') }}" placeholder="Start Date">
-                                </div>
-                                <div class="col-md-3">
-                                    <input type="date" name="end_date" class="form-control form-control-sm" 
-                                        value="{{ request('end_date') }}" placeholder="End Date">
-                                </div>
-                                <div class="col-md-2">
-                                    <button type="submit" class="btn btn-sm btn-primary w-100">
-                                        <i class="bi bi-search"></i> Filter
-                                    </button>
-                                </div>
-                            </form>
+                        <div class="card shadow-sm mt-3">
+                            <div class="card-body">
+                                <h6 class="mb-3 fw-semibold text-primary">
+                                    <i class="bi bi-funnel"></i> Filter Product Summary
+                                </h6>
+
+                                <form method="GET" action="{{ route('product.summary') }}" class="row align-items-end g-3">
+                                    
+                                    <div class="col-md-4">
+                                        <label class="form-label small fw-semibold">Start Date</label>
+                                        <input type="date"
+                                            name="start_date"
+                                            class="form-control form-control-sm"
+                                            value="{{ request('start_date') }}">
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <label class="form-label small fw-semibold">End Date</label>
+                                        <input type="date"
+                                            name="end_date"
+                                            class="form-control form-control-sm"
+                                            value="{{ request('end_date') }}">
+                                    </div>
+
+                                    <div class="col-md-4 d-flex gap-2">
+                                        <button type="submit" class="btn btn-sm btn-primary w-100">
+                                            <i class="bi bi-search"></i> Filter
+                                        </button>
+
+                                        <a href="{{ route('product.summary') }}" class="btn btn-sm btn-outline-secondary w-100">
+                                            <i class="bi bi-arrow-clockwise"></i> Reset
+                                        </a>
+                                    </div>
+
+                                </form>
+                            </div>
                         </div>
                         <div class="row g-3">
                             @forelse($summary as $su)
@@ -152,12 +114,12 @@
                                             <td>{{ \Carbon\Carbon::parse($sale->date)->format('d M Y') }}</td>
                                             <td class="text-center">
                                                 <a href="{{ route('product.sales.edit', $sale->id) }}" class="btn btn-sm btn-edit me-1">
-                                                    <i class="fas fa-edit"></i> Edit
+                                                    <i class="fas fa-edit"></i> 
                                                 </a>
                                                 <form action="{{ route('product.sales.destroy', $sale->id) }}" method="GET" class="d-inline delete-form">
                                                     @csrf
                                                     <button type="submit" class="btn btn-sm btn-delete">
-                                                        <i class="fas fa-trash-alt"></i> Delete
+                                                        <i class="fas fa-trash-alt"></i> 
                                                     </button>
                                                 </form>
                                             </td>

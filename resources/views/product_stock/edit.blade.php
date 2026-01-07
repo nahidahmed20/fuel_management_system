@@ -9,7 +9,7 @@
         height: 38px;
         padding: 6px 12px;
         border: 1px solid #ced4da;
-        border-radius: 8px;
+        border-radius: 2px;
         display: flex;
         align-items: center;
     }
@@ -57,15 +57,15 @@
                         </h4>
                         <a href="{{ route('product.stock.index') }}" 
                            class="btn btn-sm d-flex justify-content-center align-items-center mt-2 mt-sm-0"
-                           style="background: linear-gradient(45deg, #36D1DC, #5B86E5); color: white; border: none; font-weight: 500; padding: 6px 12px; border-radius: 5px;">
-                            <i class="fas fa-arrow-left me-1"></i> Back to Stock List
+                           style="background: linear-gradient(45deg, #36D1DC, #5B86E5); color: white; border: none; font-weight: 500; padding: 6px 12px; border-radius: 2px;">
+                             Stock List
                         </a>
                     </div>
                     <div class="card-body">
                         <form action="{{ route('product.stock.update', $stock->id) }}" method="POST">
                             @csrf
                             <div class="row">
-                                <div class="mb-3 col-md-6">
+                                <div class="mb-3 col-md-4">
                                     <label for="product_id" class="form-label fw-bold text-dark">Select Product</label>
                                     <select name="product_id" id="product_id" class="form-select" required>
                                         <option value="" disabled selected>-- Choose a Product --</option>
@@ -81,7 +81,7 @@
                                 </div>
 
 
-                                <div class="mb-3 col-md-6">
+                                <div class="mb-3 col-md-4">
                                     <label for="quantity" class="form-label">Quantity</label>
                                     <input type="number" step="any" name="quantity" id="quantity" class="form-control" value="{{ old('quantity', $stock->quantity) }}" required>
                                     @error('quantity')
@@ -89,7 +89,7 @@
                                     @enderror
                                 </div>
 
-                                <div class="mb-3 col-md-6">
+                                <div class="mb-3 col-md-4">
                                     <label for="buying_price" class="form-label">Buying Price (৳)</label>
                                     <input type="number" step="any" name="buying_price" id="buying_price" class="form-control" value="{{ old('buying_price', $stock->buying_price) }}" required>
                                     @error('buying_price')
@@ -97,7 +97,7 @@
                                     @enderror
                                 </div>
 
-                                <div class="mb-3 col-md-6">
+                                <div class="mb-3 col-md-4">
                                     <label for="selling_price" class="form-label">Selling Price (৳)</label>
                                     <input type="number" step="any" name="selling_price" id="selling_price" class="form-control" value="{{ old('selling_price', $stock->selling_price) }}" required>
                                     @error('selling_price')
@@ -105,7 +105,7 @@
                                     @enderror
                                 </div>
 
-                                <div class="mb-3 col-md-6">
+                                <div class="mb-3 col-md-4">
                                     <label for="date" class="form-label">Date</label>
                                     <input type="date" name="date" id="date" class="form-control" value="{{ old('date', $stock->date) }}" required>
                                     @error('date')
@@ -114,9 +114,9 @@
                                 </div>
                             </div>
                             
-                            <div class="d-flex justify-content-start mt-2">
-                                <button type="submit" class="btn text-white" style="background: linear-gradient(45deg, #0f9b8e, #129990); padding: 8px 16px; border-radius: 5px; border: none;">
-                                    Update Stock
+                            <div class="d-flex justify-content-end mt-2">
+                                <button type="submit" class="btn text-white" style="background: linear-gradient(45deg, #0f9b8e, #129990); padding: 6px 16px; border-radius: 2px; border: none;">
+                                    Update 
                                 </button>
                             </div>    
                         </form>

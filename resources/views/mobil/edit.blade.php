@@ -48,8 +48,8 @@
                         </div>
                         <a href="{{ route('mobil.index') }}" 
                         class="btn btn-sm d-flex align-items-center mt-2 mt-sm-0"
-                        style="background: linear-gradient(45deg, #36D1DC, #5B86E5); color: white; border: none; font-weight: 500; padding: 6px 12px; border-radius: 5px;">
-                            <i class="fas fa-arrow-left me-1"></i> Mobil List
+                        style="background: linear-gradient(45deg, #36D1DC, #5B86E5); color: white; border: none; font-weight: 500; padding: 6px 12px; border-radius: 2px;">
+                            Mobil List
                         </a>
                     </div>
                     <div class="card-body">
@@ -57,31 +57,30 @@
                             @csrf
 
                             <div class="row g-3">
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <label for="name" class="form-label">Product Name</label>
                                     <input type="text" name="name" id="name" class="form-control" value="{{ $stock->name }}" required>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <label for="buying_price" class="form-label">Buying Price (৳)</label>
                                     <input type="number" name="buying_price" id="buying_price" class="form-control" value="{{ $stock->buying_price }}" step="any" required>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <label for="selling_price" class="form-label">Selling Price (৳)</label>
                                     <input type="number" name="selling_price" id="selling_price" class="form-control" value="{{ $stock->selling_price }}" step="any" required>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <label for="quantity" class="form-label">Quantity (L)</label>
                                     <input type="number" name="quantity" id="quantity" class="form-control" value="{{ $stock->quantity }}" step="any" required>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <label for="date" class="form-label">Date</label>
                                     <input type="date" name="date" id="date" class="form-control" value="{{ $stock->date }}" required>
                                 </div>
                             </div>
-
-                            <div class="d-flex justify-content-start ">
-                                <button type="submit" class="btn mt-4 text-white" style="background: linear-gradient(45deg, #ff6a00, #ee0979); padding: 8px 16px; border-radius: 5px; border: none;">
-                                    Update Stock
+                            <div class="d-flex justify-content-end">
+                                <button type="submit" class="btn mt-4 text-white" style="background: linear-gradient(45deg, #0f9b8e, #129990); padding: 6px 16px; border-radius: 2px; border: none;">
+                                    Update
                                 </button>
                             </div>
                         </form>

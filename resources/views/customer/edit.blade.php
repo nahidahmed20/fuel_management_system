@@ -46,8 +46,8 @@
                         </div>
                         <a href="{{ route('customers.index') }}" 
                         class="btn btn-sm d-flex justify-content-center align-items-center mt-2 mt-sm-0"
-                        style="background: linear-gradient(45deg, #36D1DC, #5B86E5); color: white; border: none; font-weight: 500; padding: 6px 12px; border-radius: 5px;">
-                            <i class="fas fa-arrow-left me-1"></i> Customer List
+                        style="background: linear-gradient(45deg, #36D1DC, #5B86E5); color: white; border: none; font-weight: 500; padding: 6px 12px; border-radius: 2px;">
+                            Customer List
                         </a>
                     </div>
 
@@ -56,24 +56,32 @@
                             @csrf
                             @method('PUT')
 
-                            <div class="mb-3">
-                                <label for="name" class="form-label">Customer Name <span class="text-danger">*</span></label>
-                                <input type="text" name="name" value="{{ $customer->name }}" class="form-control" required>
+                            <div class="row">
+                                <div class="mb-3 col-md-4">
+                                    <label for="name" class="form-label">Customer Name <span class="text-danger">*</span></label>
+                                    <input type="text" name="name" value="{{ $customer->name }}" class="form-control" required>
+                                </div>
+
+                                <div class="mb-3 col-md-4">
+                                    <label for="mobile" class="form-label">Mobile</label>
+                                    <input type="text" name="mobile" value="{{ $customer->mobile }}" class="form-control">
+                                </div>
+
+                                <div class="mb-3 col-md-4">
+                                    <label for="address" class="form-label">Address</label>
+                                    <input name="address" class="form-control" rows="3">{{ $customer->address }}</input>
+                                </div>
                             </div>
 
-                            <div class="mb-3">
-                                <label for="mobile" class="form-label">Mobile</label>
-                                <input type="text" name="mobile" value="{{ $customer->mobile }}" class="form-control">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="d-flex justify-content-md-end justify-content-center mt-3">
+                                        <button type="submit" class="btn text-white px-4" style="background-color:#129990;border-radius: 2px; padding: 4px;">
+                                            Update
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
-
-                            <div class="mb-3">
-                                <label for="address" class="form-label">Address</label>
-                                <textarea name="address" class="form-control" rows="3">{{ $customer->address }}</textarea>
-                            </div>
-
-                            <button type="submit" class="btn text-white" style="background: linear-gradient(45deg, #ff7300, #f85108); padding: 8px 16px; border-radius: 5px; border: none;">
-                                 Update Customer
-                            </button>
                         </form>
                     </div>
                 </div>

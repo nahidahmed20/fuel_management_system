@@ -4,64 +4,6 @@
     Mobil Sell List
 @endsection
 
-@push('style')
-<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
-<style>
-    .card {
-        box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1),
-                    4px 8px 20px rgba(0, 0, 0, 0.05);
-    }
-
-    .action-btns .btn {
-        margin-right: 5px;
-    }
-    .btn-back,
-    .btn-edit,
-    .btn-delete {
-        min-width: 60px;
-        text-align: center;
-        font-weight: 500;
-        border: none;
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        padding: 4px 10px;
-        border-radius: 5px;
-        font-size: 0.9rem;
-        cursor: pointer;
-        text-decoration: none;
-        color: white;
-    }
-    .btn-edit {
-        background: #20c997;
-        color: white;
-        padding: 4px 10px;
-    }
-   .btn-delete { 
-        background: #e63946;
-        color: white;
-        padding: 4px 10px;
-    }  
-
-    @media (max-width: 576px) {
-        .table-responsive {
-            font-size: 0.9rem;
-        }
-
-        .action-btns .btn {
-            display: block !important;
-            width: 100% !important;
-            margin-bottom: 8px !important;
-            text-align: center !important;
-        }
-
-        .delete-form {
-            display: block !important;
-            width: 100% !important;
-        }
-    }
-</style>
-@endpush
 
 @section('content')
 <div class="content-page">
@@ -77,8 +19,8 @@
                         </div>
                         <a href="{{ route('mobilOut.create') }}" 
                         class="btn btn-sm d-flex justify-content-center align-items-center mt-2 mt-sm-0"
-                        style="background: linear-gradient(45deg, #36D1DC, #5B86E5); color: white; border: none; font-weight: 500; padding: 6px 12px; border-radius: 5px;">
-                            <i class="fas fa-plus-circle me-1"></i> Add New Sell
+                        style="background: linear-gradient(45deg, #36D1DC, #5B86E5); color: white; border: none; font-weight: 500; padding: 6px 12px; border-radius: 2px;">
+                            Add 
                         </a>
                     </div>
 
@@ -105,14 +47,14 @@
                                         <td>{{ \Carbon\Carbon::parse($out->date)->format('d M Y') }}</td>
                                         <td class="action-btns text-center">
                                             <a href="{{ route('mobilOut.edit', $out->id) }}" class="btn btn-sm btn-edit" style="background: #20c997; color: white;">
-                                                <i class="fas fa-edit"></i> Edit
+                                                <i class="fas fa-edit"></i> 
                                             </a>
                                             {{-- Optional Delete --}}
                                             
                                             <form action="{{ route('mobilOut.destroy', $out->id) }}" method="GET" style="display:inline-block;" class="delete-form">
                                                 @csrf
                                                 <button type="submit" class="btn btn-sm btn-delete" style="background: #e63946; color: white;">
-                                                    <i class="fas fa-trash-alt"></i> Delete
+                                                    <i class="fas fa-trash-alt"></i> 
                                                 </button>
                                             </form>
                                         </td>

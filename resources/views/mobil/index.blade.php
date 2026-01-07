@@ -4,75 +4,6 @@
     Mobil Stock List
 @endsection
 
-@push('style')
-<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
-<style>
-    .card {
-        box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1),
-                    4px 8px 20px rgba(0, 0, 0, 0.05);
-    }
-
-    .action-btns .btn {
-        margin-right: 6px;
-        border: none;
-        font-weight: 500;
-    }
-
-    .btn-edit {
-        background: #20c997;
-        color: white;
-        padding: 4px 10px;
-    }
-
-    .btn-delete {
-        background: #e63946;
-        color: white;
-        padding: 4px 10px;
-    }
-
-    .table thead {
-        background: #27548A;
-    }
-
-    .table thead th {
-        color: #ffffff !important;
-    }
-    .btn-back,
-    .btn-edit,
-    .btn-delete {
-        min-width: 60px;
-        text-align: center;
-        font-weight: 500;
-        border: none;
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        padding: 4px 10px;
-        border-radius: 5px;
-        font-size: 0.9rem;
-        cursor: pointer;
-        text-decoration: none;
-        color: white;
-    }
-
-    @media (max-width: 576px) {
-        .table-responsive {
-            font-size: 0.9rem;
-        }
-
-        .action-btns {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-
-        .action-btns .btn,
-        .delete-form {
-            width: 100% !important;
-        }
-    }
-</style>
-@endpush
 
 @section('content')
 <div class="content-page">
@@ -89,8 +20,8 @@
                         </div>
                         <a href="{{ route('mobil.create') }}" 
                         class="btn btn-sm d-flex justify-content-center align-items-center mt-2 mt-sm-0"
-                        style="background: linear-gradient(45deg, #36D1DC, #5B86E5); color: white; border: none; font-weight: 500; padding: 6px 12px; border-radius: 5px;">
-                            <i class="fas fa-plus-circle me-1"></i> Add New Stock
+                        style="background: linear-gradient(45deg, #36D1DC, #5B86E5); color: white; border: none; font-weight: 500; padding: 6px 12px; border-radius: 0px;">
+                             Add 
                         </a>
                     </div>
 
@@ -119,12 +50,12 @@
                                             <td>{{ number_format($stock->quantity, 3) }}</td>
                                             <td class="action-btns text-center">
                                                 <a href="{{ route('mobil.stock.edit', $stock->id) }}" class="btn btn-sm btn-edit">
-                                                    <i class="fas fa-edit"></i> Edit
+                                                    <i class="fas fa-edit"></i> 
                                                 </a>
                                                 <form action="{{ route('mobil.stock.delete', $stock->id) }}" method="GET" class="d-inline delete-form">
                                                     @csrf
                                                     <button type="submit" class="btn btn-sm btn-delete">
-                                                        <i class="fas fa-trash-alt"></i> Delete
+                                                        <i class="fas fa-trash-alt"></i> 
                                                     </button>
                                                 </form>
                                             </td>

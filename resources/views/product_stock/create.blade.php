@@ -3,7 +3,7 @@
 @section('title', 'Add Product Stock')
 
 @push('style')
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
 <style>
     .select2-container--default .select2-selection--single {
         height: 38px;
@@ -11,35 +11,11 @@
         border: 1px solid #ced4da;
         border-radius: 4px;
     }
-</style>
-
-<style>
-    .card {
-        box-shadow: 2px 4px 10px rgba(0,0,0,0.1),
-                    4px 8px 20px rgba(0,0,0,0.05);
-    }
-
-    @media (max-width: 576px) {
-        .card-header {
-            flex-direction: column;
-            align-items: flex-start !important;
-        }
-
-        .card-header .btn {
-            margin-top: 10px;
-            width: 100%;
-            text-align: center;
-        }
-
-        .card-title {
-            font-size: 1.1rem;
-        }
-
-        button[type="submit"] {
-            width: 100%;
-        }
+    .select2-container--default .select2-selection--single .select2-selection__rendered{
+        line-height: 22px;
     }
 </style>
+
 @endpush
 
 @section('content')
@@ -54,8 +30,8 @@
                         </h4>
                         <a href="{{ route('product.stock.index') }}" 
                            class="btn btn-sm d-flex justify-content-center align-items-center mt-2 mt-sm-0"
-                           style="background: linear-gradient(45deg, #36D1DC, #5B86E5); color: white; border: none; font-weight: 500; padding: 6px 12px; border-radius: 5px;">
-                            <i class="fas fa-arrow-left me-1"></i> Back to Stock List
+                           style="background: linear-gradient(45deg, #36D1DC, #5B86E5); color: white; border: none; font-weight: 500; padding: 6px 12px; border-radius: 2px;">
+                             Stock List
                         </a>
                     </div>
                     <div class="card-body">
@@ -63,7 +39,7 @@
                             @csrf
 
                             <div class="row">
-                                <div class="mb-3 col-md-6">
+                                <div class="mb-3 col-md-4">
                                     <label for="product_id" class="form-label fw-bold text-dark">Select Product</label>
                                     <select name="product_id" id="product_id" class="form-select select2" required>
                                         <option value="" disabled selected>-- Choose a Product --</option>
@@ -77,7 +53,7 @@
                                 </div>
 
 
-                                <div class="mb-3 col-md-6">
+                                <div class="mb-3 col-md-4">
                                     <label for="quantity" class="form-label">Quantity</label>
                                     <input type="number" step="any" name="quantity" id="quantity" class="form-control" placeholder="Enter quantity" required>
                                     @error('quantity')
@@ -85,7 +61,7 @@
                                     @enderror
                                 </div>
 
-                                <div class="mb-3 col-md-6">
+                                <div class="mb-3 col-md-4">
                                     <label for="buying_price" class="form-label">Buying Price (৳)</label>
                                     <input type="number" step="any" name="buying_price" id="buying_price" class="form-control" placeholder="Enter buying price" required>
                                     @error('buying_price')
@@ -93,7 +69,7 @@
                                     @enderror
                                 </div>
 
-                                <div class="mb-3 col-md-6">
+                                <div class="mb-3 col-md-4">
                                     <label for="selling_price" class="form-label">Selling Price (৳)</label>
                                     <input type="number" step="any" name="selling_price" id="selling_price" class="form-control" placeholder="Enter selling price" required>
                                     @error('selling_price')
@@ -101,7 +77,7 @@
                                     @enderror
                                 </div>
 
-                                <div class="mb-3 col-md-6">
+                                <div class="mb-3 col-md-4">
                                     <label for="date" class="form-label">Date</label>
                                     <input type="date" name="date" id="date" class="form-control" value="{{ date('Y-m-d') }}" required>
                                     @error('date')
@@ -110,8 +86,8 @@
                                 </div>
                             </div>
 
-                            <div class="d-flex justify-content-start mt-2">
-                                <button type="submit" class="btn text-white" style="background: linear-gradient(45deg, #0f9b8e, #129990); padding: 8px 16px; border-radius: 5px; border: none;">
+                            <div class="d-flex justify-content-end mt-2">
+                                <button type="submit" class="btn text-white" style="background: linear-gradient(45deg, #0f9b8e, #129990); padding: 6px 16px; border-radius: 2px; border: none;">
                                     Add Stock
                                 </button>
                             </div>

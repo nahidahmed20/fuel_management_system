@@ -4,6 +4,7 @@
 
 @push('style')
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.bootstrap5.min.css">
 
 <style>
     .card-header-custom {
@@ -24,6 +25,62 @@
         padding: 4px 10px;
         font-size: 0.85rem;
     }
+
+    /* Dropdown */
+    .action-dropdown {
+        position: absolute;
+        top: 80%;
+        left: 70px;
+        background: #fff;
+        border-radius: 2px;
+        border: 1px solid #e5e7eb;
+        min-width: 126px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        z-index: 999;
+    display: none;
+    }
+    .action-dropdown a, .action-dropdown button {
+        display: block;
+        padding: 8px 12px;
+        font-size: 0.85rem;
+        text-decoration: none;
+        width: 100%;
+        text-align: left;
+        background: none;
+        border: none;
+    }
+    .action-dropdown a:hover, .action-dropdown button:hover {
+        background-color: #f1f5f9;
+    }
+    /* Top control row flex */
+    .dataTables_wrapper .dataTables_length,
+    .dataTables_wrapper .dt-buttons,
+    .dataTables_wrapper .dataTables_filter {
+        display: inline-flex;
+        align-items: center;
+    }
+
+    /* Wrapper top alignment */
+    .dataTables_wrapper .dataTables_length {
+        float: left;
+    }
+
+    .dataTables_wrapper .dataTables_filter {
+        float: right;
+    }
+
+    /* Buttons in the middle */
+    .dataTables_wrapper .dt-buttons {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    /* Button spacing */
+    .dataTables_wrapper .dt-buttons .dt-button {
+        margin: 0 5px;
+    }
+
     @media (max-width: 576px) {
         .card-header-custom {
             flex-direction: column;
@@ -76,15 +133,32 @@
                                         <td>{{ $customer->name }}</td>
                                         <td>{{ $customer->mobile }}</td>
                                         <td>{{ $customer->address }}</td>
-                                        <td class="text-center">
-                                            <button class="btn btn-sm open-action-modal"
-                                            id="open-action-modal"
-                                                    data-id="{{ $customer->id }}"
-                                                    data-name="{{ $customer->name }}"
-                                                    data-mobile="{{ $customer->mobile }}"
-                                                    style="background: linear-gradient(45deg, #36D1DC, #5B86E5); color: white; border: none;">
-                                                <i class="fas fa-ellipsis-h me-1"></i> More Options
+                                        <td class="text-center position-relative">
+                                            <button class="btn btn-sm action-toggle"
+                                                data-id="{{ $customer->id }}"
+                                                style="background: linear-gradient(45deg, #36D1DC, #5B86E5); color: white; border-radius: 2px;">
+                                                <i class="fas fa-ellipsis-h"></i> More Options
                                             </button>
+
+                                            {{-- Dropdown --}}
+                                            <div class="action-dropdown shadow-sm">
+                                                <a href="{{ route('customers.edit', $customer->id) }}">
+                                                    <i class="fa fa-edit text-success me-1"></i> Edit
+                                                </a>
+                                                <a href="{{ route('customers.show', $customer->id) }}">
+                                                    <i class="fa fa-eye text-primary me-1"></i> Details
+                                                </a>
+                                                <a href="{{ route('customer-due-payments.create', ['customer_id'=>$customer->id]) }}">
+                                                    <i class="fa fa-money-bill-wave text-info me-1"></i> Payment
+                                                </a>
+                                                <form action="{{ route('customers.destroy', $customer->id) }}" method="POST" class="delete-form">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="text-danger">
+                                                        <i class="fa fa-trash me-1"></i> Delete
+                                                    </button>
+                                                </form>
+                                            </div>
                                         </td>
                                     </tr>
                                     @empty
@@ -104,69 +178,34 @@
     </div>
 </div>
 
-{{-- Modal --}}
-<div class="modal fade" id="actionModal" tabindex="-1" aria-labelledby="actionModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content" style="border-radius: 10px;">
-            <div class="modal-header justify-content-between align-items-start text-white" style="background: linear-gradient(45deg, #0f9b8e, #129990);">
-                <div>
-                    <h5 class="modal-title mb-1" id="actionModalLabel">Customer Options</h5>
-                    <small>
-                        <i class="fas fa-user me-1"></i> <span id="modalCustomerName" class="fw-bold"></span> |
-                        <i class="fas fa-phone-alt ms-1 me-1"></i> <span id="modalCustomerMobile"></span>
-                    </small>
-                </div>
-                <button type="button" class="btn-close btn-close-white mt-1" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-
-
-            <div class="modal-body">
-                <div class="row g-2 px-2">
-                    <div class="col-md-6 col-sm-3 mb-3">
-                        <a id="modalEdit" class="btn w-100 text-white" style="background: linear-gradient(45deg, #20c997, #2ecc71);">
-                            <i class="fa fa-edit me-1"></i> Edit
-                        </a>
-                    </div>
-                    <div class="col-md-6 col-sm-3">
-                        <form id="modalDeleteForm" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn w-100 text-white" style="background: linear-gradient(45deg, #e63946, #c62828);">
-                                <i class="fa fa-trash me-1"></i> Delete
-                            </button>
-                        </form>
-                    </div>
-                    <div class="col-md-6 col-sm-3">
-                        <a id="modalDetails" class="btn w-100 text-white" style="background: linear-gradient(45deg, #3498db, #2980b9);">
-                            <i class="fa fa-eye me-1"></i> Details
-                        </a>
-                    </div>
-                    <div class="col-md-6 col-sm-3">
-                        <a id="modalPayment" class="btn w-100 text-white" style="background: linear-gradient(45deg, #0f9b8e, #129990);">
-                            <i class="fa fa-money-bill-wave me-1"></i> Payment
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
 @endsection
 
 @push('script')
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.bootstrap5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
 
 <script>
 $(document).ready(function () {
+
+    // Initialize DataTable with export buttons
     $('#customer').DataTable({
         responsive: true,
         pagingType: 'simple_numbers',
+        dom: 'lBfrtip', 
+        buttons: [
+            { extend: 'excelHtml5', className: 'btn btn-sm btn-success', text: '<i class="fa fa-file-excel"></i> Excel' },
+            { extend: 'pdfHtml5', className: 'btn btn-sm btn-danger', text: '<i class="fa fa-file-pdf"></i> PDF' },
+            { extend: 'print', className: 'btn btn-sm btn-primary', text: '<i class="fa fa-print"></i> Print' }
+        ],
         language: {
             paginate: {
                 previous: "<i class='fas fa-angle-left'></i>",
@@ -175,47 +214,38 @@ $(document).ready(function () {
         }
     });
 
-    $(document).on('click', '#open-action-modal', function () {
-        const id = $(this).data('id');
-        const name = $(this).data('name');
-        const mobile = $(this).data('mobile');
 
-        $('#modalCustomerName').text(name);
-        $('#modalCustomerMobile').text(mobile);
-        $('#modalEdit').attr('href', `/customers/${id}/edit`);
-        $('#modalDetails').attr('href', `/customers/${id}`);
-        $('#modalPayment').attr('href', `/customer-due-payments/create?customer_id=${id}`);
-        $('#modalDeleteForm').attr('action', `/customers/${id}`);
-
-        // Delete confirmation
-        $('#modalDeleteForm').off('submit').on('submit', function (e) {
-            e.preventDefault();
-            Swal.fire({
-                title: 'Are you sure?',
-                text: "This action cannot be undone!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#d33',
-                cancelButtonColor: '#3085d6',
-                confirmButtonText: 'Yes, delete it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    e.currentTarget.submit();
-                }
-            });
-        });
-
-        const modal = new bootstrap.Modal(document.getElementById('actionModal'));
-        modal.show();
+    // Toggle dropdown
+    $(document).on('click', '.action-toggle', function(e){
+        e.stopPropagation();
+        $('.action-dropdown').hide(); // hide others
+        $(this).next('.action-dropdown').toggle();
     });
+
+    // Click outside closes dropdown
+    $(document).on('click', function(){
+        $('.action-dropdown').hide();
+    });
+
+    // Delete confirmation
+    $(document).on('submit', '.delete-form', function(e){
+        e.preventDefault();
+        let form = this;
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "This action cannot be undone!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result)=>{
+            if(result.isConfirmed){
+                form.submit();
+            }
+        });
+    });
+
 });
 </script>
 @endpush
-
-
-
-
-
-
-
-
