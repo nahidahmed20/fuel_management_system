@@ -77,33 +77,4 @@ class LoanController extends Controller
         return redirect()->route('loans.index')->with('success', 'Loan deleted successfully.');
     }
 
-    public function downloadTodayPdf()
-    {
-        $today = Loan::with('borrower')->whereDate('loan_date', Carbon::today())->get();
-        $total = $today->sum('amount');
-        $date = Carbon::now()->format('d M, Y');
-
-        $pdf = Pdf::loadView('loan.pdf', compact('today', 'total', 'date'))->setPaper('a4', 'portrait');
-        return $pdf->download('today_loans.pdf');
-    }
-
-    public function downloadMonthPdf()
-    {
-        $month = Loan::with('borrower')->whereMonth('loan_date', now()->month)->whereYear('loan_date', now()->year)->get();
-        $total = $month->sum('amount');
-        $date = now()->format('F Y');
-
-        $pdf = Pdf::loadView('loan.pdf', ['today' => $month, 'total' => $total, 'date' => $date])->setPaper('a4');
-        return $pdf->download('monthly_loans.pdf');
-    }
-
-    public function downloadYearPdf()
-    {
-        $year = Loan::with('borrower')->whereYear('loan_date', now()->year)->get();
-        $total = $year->sum('amount');
-        $date = now()->format('Y');
-
-        $pdf = Pdf::loadView('loan.pdf', ['today' => $year, 'total' => $total, 'date' => $date])->setPaper('a4');
-        return $pdf->download('yearly_loans.pdf');
-    }
 }

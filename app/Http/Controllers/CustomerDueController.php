@@ -114,35 +114,6 @@ class CustomerDueController extends Controller
         return redirect()->route('customer_due.index')->with('success', 'Customer due deleted successfully.');
     }
 
-    public function downloadTodayDuePDF()
-    {
-        $today = CustomerDue::with('customer')->whereDate('due_date', Carbon::today())->get();
-        $total = $today->sum('amount_due');
-        $date = Carbon::today()->format('d F, Y');
-
-        $pdf = Pdf::loadView('customer_due.pdf', compact('today', 'total', 'date'));
-        return $pdf->download('customer-due-today.pdf');
-    }
-
-    public function downloadMonthDuePDF()
-    {
-        $month = CustomerDue::with('customer')->whereMonth('due_date', Carbon::now()->month)->get();
-        $total = $month->sum('amount_due');
-        $date = Carbon::now()->format('F, Y');
-
-        $pdf = Pdf::loadView('customer_due.pdf', compact('month', 'total', 'date'));
-        return $pdf->download('customer-due-month.pdf');
-    }
-
-    public function downloadYearDuePDF()
-    {
-        $year = CustomerDue::with('customer')->whereYear('due_date', Carbon::now()->year)->get();
-        $total = $year->sum('amount_due');
-        $date = Carbon::now()->format('Y');
-
-        $pdf = Pdf::loadView('customer_due.pdf', compact('year', 'total', 'date'));
-        return $pdf->download('customer-due-year.pdf');
-    }
 
     public function getTotalDue(Request $request)
     {

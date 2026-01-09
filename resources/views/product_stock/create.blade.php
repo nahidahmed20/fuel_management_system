@@ -9,10 +9,13 @@
         height: 38px;
         padding: 6px 12px;
         border: 1px solid #ced4da;
-        border-radius: 4px;
+        border-radius: 0px !important;
     }
     .select2-container--default .select2-selection--single .select2-selection__rendered{
         line-height: 22px;
+    }
+    .select2-container .select2-selection--single {
+        height: 38px !important;
     }
 </style>
 

@@ -58,77 +58,76 @@
                     
 
                     <div class="card shadow-sm border-0 mt-3">
-    <!-- Card Header -->
-    <div class="card-header bg-white d-flex justify-content-between align-items-center">
-        <h5 class="mb-0 fw-semibold">
-            <i class="fas fa-chart-line me-2 text-primary"></i> Summary
-        </h5>
-    </div>
-
-    <!-- Card Body -->
-    <div class="card-body">
-
-        <!-- Filter -->
-        <form method="GET" action="{{ route('fuel.sell.summary') }}" class="row g-2 mb-4">
-            <div class="col-md-3">
-                <input type="date" name="start_date"
-                       class="form-control form-control-sm"
-                       value="{{ request('start_date') }}">
-            </div>
-
-            <div class="col-md-3">
-                <input type="date" name="end_date"
-                       class="form-control form-control-sm"
-                       value="{{ request('end_date') }}">
-            </div>
-
-            <div class="col-md-2">
-                <button type="submit" class="btn btn-sm btn-primary w-100">
-                    <i class="bi bi-search"></i> Filter
-                </button>
-            </div>
-        </form>
-
-        <!-- Summary Cards -->
-        <div class="row g-3">
-            @forelse($fuelSummary as $summary)
-                <div class="col-md-4">
-                    <div class="card text-white shadow-sm h-100 border-0"
-                        style="background: linear-gradient(135deg, #36D1DC, #5B86E5); border-radius: 12px;">
-                        <div class="card-body">
-                            <h5 class="fw-bold mb-3">
-                                <i class="fas fa-gas-pump me-2"></i>
-                                {{ $summary->fuelType->name ?? 'N/A' }}
+                        <!-- Card Header -->
+                        <div class="card-header bg-white d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0 fw-semibold">
+                                <i class="fas fa-chart-line me-2 text-primary"></i> Summary
                             </h5>
+                        </div>
 
-                            <p class="mb-2">
-                                <i class="fas fa-balance-scale me-2"></i>
-                                <span class="fw-semibold">Total Quantity</span><br>
-                                <span class="fs-5">
-                                    {{ number_format($summary->total_quantity, 3) }} L
-                                </span>
-                            </p>
+                        <!-- Card Body -->
+                        <div class="card-body">
 
-                            <p class="mb-0">
-                                <i class="fas fa-coins me-2"></i>
-                                <span class="fw-semibold">Total Sell</span><br>
-                                <span class="fs-5">
-                                    ৳{{ number_format($summary->total_sell, 3) }}
-                                </span>
-                            </p>
+                            <!-- Filter -->
+                            <form method="GET" action="{{ route('fuel.sell.summary') }}" class="row g-2 mb-4">
+                                <div class="col-md-3">
+                                    <input type="date" name="start_date"
+                                        class="form-control form-control-sm"
+                                        value="{{ request('start_date') }}">
+                                </div>
+
+                                <div class="col-md-3">
+                                    <input type="date" name="end_date"
+                                        class="form-control form-control-sm"
+                                        value="{{ request('end_date') }}">
+                                </div>
+
+                                <div class="col-md-2">
+                                    <button type="submit" class="btn btn-sm btn-primary w-100">
+                                        <i class="bi bi-search"></i> Filter
+                                    </button>
+                                </div>
+                            </form>
+
+                            <!-- Summary Cards -->
+                            <div class="row g-3">
+                                @forelse($fuelSummary as $summary)
+                                    <div class="col-md-4">
+                                        <div class="card text-white shadow-sm h-100 border-0"
+                                            style="background: linear-gradient(135deg, #36D1DC, #5B86E5); border-radius: 12px;">
+                                            <div class="card-body">
+                                                <h5 class="fw-bold mb-3">
+                                                    <i class="fas fa-gas-pump me-2"></i>
+                                                    {{ $summary->fuelType->name ?? 'N/A' }}
+                                                </h5>
+
+                                                <p class="mb-2">
+                                                    <i class="fas fa-balance-scale me-2"></i>
+                                                    <span class="fw-semibold">Total Quantity</span><br>
+                                                    <span class="fs-5">
+                                                        {{ number_format($summary->total_quantity, 3) }} L
+                                                    </span>
+                                                </p>
+
+                                                <p class="mb-0">
+                                                    <i class="fas fa-coins me-2"></i>
+                                                    <span class="fw-semibold">Total Sell</span><br>
+                                                    <span class="fs-5">
+                                                        ৳{{ number_format($summary->total_sell, 3) }}
+                                                    </span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @empty
+                                    <div class="col-12 text-center text-muted py-4">
+                                        No summary data found.
+                                    </div>
+                                @endforelse
+                            </div>
+
                         </div>
                     </div>
-                </div>
-            @empty
-                <div class="col-12 text-center text-muted py-4">
-                    No summary data found.
-                </div>
-            @endforelse
-        </div>
-
-    </div>
-</div>
-
                     <hr style="height:2px;border-width:0;color:gray;background-color:gray">
                     {{-- Table --}}
                     <div class="card-body p-0">

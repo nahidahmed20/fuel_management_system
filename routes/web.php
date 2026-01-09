@@ -11,6 +11,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\MobilController;
 use App\Http\Controllers\NozzleController;
 use App\Http\Controllers\ProfitController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\ProductController;
@@ -175,9 +176,6 @@ Route::middleware('auth')->group(function () {
 
     });
 
-    Route::get('/product/report/{type}', [ProductController::class, 'reportView'])->name('product.report.view');
-    Route::get('/product/report-pdf/{type}', [ProductController::class, 'downloadProductPdf'])->name('product.report.download');
-
     // Expense Route
     Route::prefix('expense')->group(function () {
         Route::get('/', [ExpenseController::class, 'index'])->name('expense.index');
@@ -186,8 +184,6 @@ Route::middleware('auth')->group(function () {
         Route::get('/edit/{id}', [ExpenseController::class, 'edit'])->name('expense.edit');
         Route::put('/update/{id}', [ExpenseController::class, 'update'])->name('expense.update');
         Route::get('/{id}', [ExpenseController::class, 'destroy'])->name('expense.destroy');
-        Route::get('/all/report', [ExpenseController::class, 'expenseReport'])->name('expense.report');
-        Route::get('/report/pdf/{type}', [ExpenseController::class, 'expenseReportPdf'])->name('expense.report.pdf');
     });
 
     Route::resource('customers', CustomerController::class);
@@ -199,21 +195,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/loans/{borrower}', [BorrowerController::class, 'show'])->name('loans.show');
     Route::get('/borrower/due/payments/create/{id}', [BorrowerController::class, 'paymentForm'])->name('borrower.payments.create');
 
-    Route::get('loan/report/today', [LoanController::class, 'downloadTodayPdf'])->name('loan.today');
-    Route::get('loan/report/month', [LoanController::class, 'downloadMonthPdf'])->name('loan.month');
-    Route::get('loan/report/year', [LoanController::class, 'downloadYearPdf'])->name('loan.year');
-
     Route::resource('loan-payments', LoanPaymentController::class);
-    Route::get('/loan/payments/report/today', [LoanPaymentController::class, 'downloadTodayPdf'])->name('loan.payment.today');
-    Route::get('/loan/payments/report/month', [LoanPaymentController::class, 'downloadMonthPdf'])->name('loan.payment.month');
-    Route::get('/loan/payments/report/year', [LoanPaymentController::class, 'downloadYearPdf'])->name('loan.payment.year');
-    Route::get('/loan/payment/total-due', [LoanPaymentController::class, 'getTotalBorrow'])->name('borrower_due.getTotalDue');
-
-    Route::get('/loan/due/report/{type}', [LoanPaymentController::class, 'loanDueReportView'])->name('loan.due.report');
-    Route::get('/loan/due/report/pdf/{type}', [LoanPaymentController::class, 'loanDueReportPdf'])->name('loan.due.report.pdf');
-    Route::get('/loan/payment/report/{type}', [LoanPaymentController::class, 'loanPaymentReportView'])->name('loan.payment.report');
-    Route::get('/loan/payment/report/pdf/{type}', [LoanPaymentController::class, 'loanPaymentReportPdf'])->name('loan.payment.report.pdf');
-
+        Route::get('/loan/payment/total-due', [LoanPaymentController::class, 'getTotalBorrow'])->name('borrower_due.getTotalDue');
     // Customer Due Route
     Route::prefix('customer-due')->group(function () {
         Route::get('/list',[CustomerDueController::class,'index'])->name('customer_due.index');
@@ -229,12 +212,7 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('customer-due-payments', CustomerDuePaymentController::class);
     Route::get('/customer/due/total-due', [CustomerDueController::class, 'getTotalDue'])->name('customer_due.getTotalDue');
-    Route::get('/customer/due/report/{type}', [CustomerDuePaymentController::class, 'customerDueReportView'])->name('customer.due.report');
-    Route::get('/customer/due/report/pdf/{type}', [CustomerDuePaymentController::class, 'customerDueReportPdf'])->name('customer.due.report.pdf');
-    Route::get('/customer/payment/report/{type}', [CustomerDuePaymentController::class, 'customerPaymentReportView'])->name('customer.payment.report');
-    Route::get('/customer/payment/report/pdf/{type}', [CustomerDuePaymentController::class, 'customerPaymentReportPdf'])->name('customer.payment.report.pdf');
-
-    // Account Route
+  
     Route::prefix('account')->group(function () {
         Route::get('/', [AccountController::class, 'index'])->name('account.index');
         Route::get('/create', [AccountController::class, 'create'])->name('account.create');
@@ -243,7 +221,7 @@ Route::middleware('auth')->group(function () {
         Route::put('/update/{id}', [AccountController::class, 'update'])->name('account.update');
         Route::get('/delete/{id}', [AccountController::class, 'destroy'])->name('account.destroy');
         Route::get('/all/report', [AccountController::class, 'accountReport'])->name('account.report');
-        Route::get('/report/pdf/{type}', [AccountController::class, 'accountReportPdf'])->name('account.report.pdf');
+        
     });
 
     // Account Route
@@ -254,8 +232,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/edit/{id}', [CashWithdrawController ::class, 'edit'])->name('cash.withdraw.edit');
         Route::put('/update/{id}', [CashWithdrawController ::class, 'update'])->name('cash.withdraw.update');
         Route::get('/delete/{id}', [CashWithdrawController ::class, 'destroy'])->name('cash.withdraw.destroy');
-        Route::get('/all/report', [CashWithdrawController ::class, 'cashWithdrawReport'])->name('cash.withdraw.report');
-        Route::get('/report/pdf/{type}', [CashWithdrawController ::class, 'cashWithdrawReportPdf'])->name('cash.withdraw.report.pdf');
+        
     });
 
     Route::get('/profit/all', [ProfitController::class, 'profitOverview'])->name('profit.all');
@@ -276,6 +253,35 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
     Route::get('/profile/edit', [ProfileController::class, 'profileEdit'])->name('profile.edit');
     Route::post('/profile/update', [ProfileController::class, 'profileUpdate'])->name('profile.update');
+
+    Route::prefix('reports')
+    ->name('reports.')
+    ->controller(ReportController::class)
+    ->group(function () {
+
+        // Fuel
+        Route::get('/fuel-stock', 'fuelStock')->name('fuel.stock');
+        Route::get('/fuel-sales', 'fuelSales')->name('fuel.sales');
+
+        // Mobile
+        Route::get('/mobile-stock', 'mobileStock')->name('mobile.stock');
+        Route::get('/mobile-sales', 'mobileSales')->name('mobile.sales');
+
+        // Product
+        Route::get('/product-stock', 'productStock')->name('product.stock');
+        Route::get('/product-sales', 'productSales')->name('product.sales');
+
+        // Customer
+        Route::get('/customer-due', 'customerDue')->name('customer.due');
+        Route::get('/customer-payment', 'customerPayment')->name('customer.payment');
+
+        // Loan
+        Route::get('/loan', 'loan')->name('loan');
+        Route::get('/loan-payment', 'loanPayment')->name('loan.payment');
+
+        // Expense
+        Route::get('/expense', 'expense')->name('expense');
+    });
 });
 
 require __DIR__.'/auth.php';

@@ -135,14 +135,6 @@
                                         <i class="fas fa-faucet text-info me-2"></i> List Nozzle
                                     </a>
                                 </li>
-
-                                {{-- Report --}}
-                                <li>
-                                    <a href="{{ route('fuel.report.view', 'today') }}" class="{{ Request::is('fuel/report/today') ? 'active' : '' }}">
-                                        <i class="fas fa-chart-line text-warning me-2"></i> Fuel Reports
-                                    </a>
-                                </li>
-
                             </ul>
                         </li>
 
@@ -180,12 +172,6 @@
                                 <li>
                                     <a href="{{ route('mobilOut.index') }}" class="{{ Request::routeIs('mobilOut.index') ? 'active' : '' }}">
                                         <i class="fas fa-receipt text-info me-2"></i> Mobil Sales List
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="{{ route('mobil.report.view','today') }}" class="{{ Request::is('mobil/report/today') ? 'active' : '' }}">
-                                        <i class="fas fa-chart-pie text-warning me-2"></i> Mobil Reports
                                     </a>
                                 </li>
 
@@ -237,12 +223,6 @@
                                 <li>
                                     <a href="{{ route('product.create') }}" class="{{ Request::routeIs('product.create') ? 'active' : '' }}">
                                         <i class="fas fa-tag text-success me-2"></i> Add Product Name
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="{{ route('product.report.view','today') }}" class="{{ Request::routeIs('product.report.view') ? 'active' : '' }}">
-                                        <i class="fas fa-chart-column text-warning me-2"></i> Sales & Stock Report
                                     </a>
                                 </li>
 
@@ -299,18 +279,6 @@
                                     </a>
                                 </li>
 
-                                <li>
-                                    <a href="{{ route('customer.due.report', 'today') }}" class="{{ Request::is('customer/due/report/today') ? 'active' : '' }}">
-                                        <i class="fas fa-chart-line text-warning me-2"></i> Customer Due Reports
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="{{ route('customer.payment.report', 'today') }}" class="{{ Request::is('customer/payment/report/today') ? 'active' : '' }}">
-                                        <i class="fas fa-chart-pie text-warning me-2"></i> Customer Payment Reports
-                                    </a>
-                                </li>
-
                             </ul>
                         </li>
 
@@ -358,18 +326,6 @@
                                     </a>
                                 </li>
 
-                                <li>
-                                    <a href="{{ route('loan.due.report', 'today') }}" class="{{ Request::is('loan/due/report/today') ? 'active' : '' }}">
-                                        <i class="fas fa-chart-line text-warning me-2"></i> Loan Due Reports
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="{{ route('loan.payment.report', 'today') }}" class="{{ Request::is('loan/payment/report/today') ? 'active' : '' }}">
-                                        <i class="fas fa-chart-pie text-warning me-2"></i> Loan Payment Reports
-                                    </a>
-                                </li>
-
                             </ul>
                         </li>
 
@@ -396,12 +352,6 @@
                                 <li>
                                     <a href="{{ route('expense.create') }}" class="{{ Request::routeIs('expense.create') ? 'active' : '' }}">
                                         <i class="fas fa-circle-plus text-success me-2"></i> Add Expense
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="{{ route('expense.report') }}" class="{{ Request::routeIs('expense.report') ? 'active' : '' }}">
-                                        <i class="fas fa-chart-bar text-warning me-2"></i> Expense Report
                                     </a>
                                 </li>
 
@@ -483,7 +433,106 @@
                             </ul>
                         </li>
 
-                    
+                        <li class="{{ Request::is('reports*') ? 'active' : '' }}">
+                        <a href="#reportsMenu"
+                        class="collapsed d-flex align-items-center"
+                        data-bs-toggle="collapse"
+                        aria-expanded="{{ Request::is('reports*') ? 'true' : 'false' }}">
+                        
+                            <i class="fas fa-users-gear text-primary me-2"></i>
+                            <span>Reports</span>
+                            <i class="fas fa-angle-down ms-auto"></i>
+                        </a>
+
+                        <ul id="reportsMenu"
+                            class="iq-submenu collapse list-unstyled ps-4 {{ Request::is('reports*') ? 'show' : '' }}">
+
+                            {{-- Fuel --}}
+                            <li>
+                                <a href="{{ route('reports.fuel.stock') }}"
+                                class="{{ Request::routeIs('reports.fuel.stock') ? 'active' : '' }}">
+                                    <i class="fas fa-gas-pump text-danger me-2"></i> Fuel Stock
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="{{ route('reports.fuel.sales') }}"
+                                class="{{ Request::routeIs('reports.fuel.sales') ? 'active' : '' }}">
+                                    <i class="fas fa-chart-line text-success me-2"></i> Fuel Sales
+                                </a>
+                            </li>
+
+                            {{-- Mobile --}}
+                            <li>
+                                <a href="{{ route('reports.mobile.stock') }}"
+                                class="{{ Request::routeIs('reports.mobile.stock') ? 'active' : '' }}">
+                                    <i class="fas fa-box text-warning me-2"></i> Mobile Stock
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="{{ route('reports.mobile.sales') }}"
+                                class="{{ Request::routeIs('reports.mobile.sales') ? 'active' : '' }}">
+                                    <i class="fas fa-cash-register text-success me-2"></i> Mobile Sales
+                                </a>
+                            </li>
+
+                            {{-- Product --}}
+                            <li>
+                                <a href="{{ route('reports.product.stock') }}"
+                                class="{{ Request::routeIs('reports.product.stock') ? 'active' : '' }}">
+                                    <i class="fas fa-warehouse text-info me-2"></i> Product Stock
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="{{ route('reports.product.sales') }}"
+                                class="{{ Request::routeIs('reports.product.sales') ? 'active' : '' }}">
+                                    <i class="fas fa-shopping-cart text-success me-2"></i> Product Sales
+                                </a>
+                            </li>
+
+                            {{-- Customer --}}
+                            <li>
+                                <a href="{{ route('reports.customer.due') }}"
+                                class="{{ Request::routeIs('reports.customer.due') ? 'active' : '' }}">
+                                    <i class="fas fa-user-clock text-danger me-2"></i> Customer Due
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="{{ route('reports.customer.payment') }}"
+                                class="{{ Request::routeIs('reports.customer.payment') ? 'active' : '' }}">
+                                    <i class="fas fa-money-bill text-success me-2"></i> Customer Payment
+                                </a>
+                            </li>
+
+                            {{-- Loan --}}
+                            <li>
+                                <a href="{{ route('reports.loan') }}"
+                                class="{{ Request::routeIs('reports.loan') ? 'active' : '' }}">
+                                    <i class="fas fa-hand-holding-usd text-warning me-2"></i> Loan
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="{{ route('reports.loan.payment') }}"
+                                class="{{ Request::routeIs('reports.loan.payment') ? 'active' : '' }}">
+                                    <i class="fas fa-receipt text-success me-2"></i> Loan Payment
+                                </a>
+                            </li>
+
+                            {{-- Expense --}}
+                            <li>
+                                <a href="{{ route('reports.expense') }}"
+                                class="{{ Request::routeIs('reports.expense') ? 'active' : '' }}">
+                                    <i class="fas fa-file-invoice-dollar text-danger me-2"></i> Expense
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+       
                         {{-- Manage Users --}}
                         
                         <li class="{{ Request::is('user') ? 'active' : '' }}">
@@ -521,8 +570,6 @@
 
                             </ul>
                         </li>
-                    
-
                     </ul>
                 </nav>
 

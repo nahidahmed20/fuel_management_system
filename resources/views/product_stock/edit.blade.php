@@ -5,20 +5,24 @@
 @push('style')
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <style>
-    .select2-container--default .select2-selection--single {
-        height: 38px;
-        padding: 6px 12px;
-        border: 1px solid #ced4da;
-        border-radius: 2px;
-        display: flex;
-        align-items: center;
-    }
     .select2-selection__arrow {
         height: 100%;
     }
     .select2-container--default .select2-selection--single .select2-selection__rendered {
         color: #444;
         line-height: 23px !important;
+    }
+    .select2-container--default .select2-selection--single {
+        height: 38px;
+        padding: 6px 12px;
+        border: 1px solid #ced4da;
+        border-radius: 0px !important;
+    }
+    .select2-container--default .select2-selection--single .select2-selection__rendered{
+        line-height: 22px;
+    }
+    .select2-container .select2-selection--single {
+        height: 38px !important;
     }
 
     .card {
