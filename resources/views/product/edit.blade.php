@@ -53,28 +53,32 @@
                         </a>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('product.update', $product->id) }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('product.stocks.update', $product->id) }}" method="POST">
                             @csrf
-                            <div class="mb-3 col-md-4">
-                                <label for="name" class="form-label">Product Name</label>
-                                <input 
-                                    type="text" 
-                                    name="name" 
-                                    id="name" 
-                                    class="form-control @error('name') is-invalid @enderror" 
-                                    placeholder="e.g. Laptop" 
-                                    value="{{ old('name', $product->name) }}" 
-                                    required>
-                                @error('name')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
+                            <input type="hidden" name="products[{{ $i }}][stock_id]" value="{{ $stock->id }}">
 
-                            <div class="d-flex justify-content-end">
-                                <button type="submit" class="btn mt-4 text-white" style="background: linear-gradient(45deg, #0f9b8e, #129990); padding: 6px 16px; border-radius: 2px; border: none;">
-                                    Update
-                                </button>
-                            </div>
+                            @foreach($stocks as $index => $stock)
+                                <div class="row mb-2">
+                                    <input type="hidden" name="stocks[{{ $index }}][id]" value="{{ $stock->id }}">
+
+                                    <div class="col-md-3">
+                                        <input type="number" step="0.001" name="stocks[{{ $index }}][quantity]"
+                                            value="{{ $stock->quantity }}" class="form-control">
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <input type="number" step="0.001" name="stocks[{{ $index }}][buying_price]"
+                                            value="{{ $stock->buying_price }}" class="form-control">
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <input type="number" step="0.001" name="stocks[{{ $index }}][selling_price]"
+                                            value="{{ $stock->selling_price }}" class="form-control">
+                                    </div>
+                                </div>
+                            @endforeach
+
+                            <button class="btn btn-success">Update All</button>
                         </form>
                     </div>
                 </div>
@@ -84,3 +88,31 @@
     </div>
 </div>
 @endsection
+
+@push('script')
+<script>
+    const nameInput = document.getElementById('name');
+    const skuInput  = document.getElementById('sku');
+    const originalName = nameInput.value;
+    const originalSku  = skuInput.value;
+
+    nameInput.addEventListener('input', function () {
+        let name = this.value.trim();
+        if (name === originalName) {
+            skuInput.value = originalSku;
+            return;
+        }
+
+        if (name.length === 0) {
+            skuInput.value = '';
+            return;
+        }
+
+
+        let random = Math.floor(1000 + Math.random() * 9000);
+
+        skuInput.value = `SK-${random}`;
+    });
+</script>
+@endpush
+

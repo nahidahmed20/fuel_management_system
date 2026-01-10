@@ -59,6 +59,7 @@
                                     <tr>
                                         <th style="color:white !important;">#</th>
                                         <th style="color:white !important;">Product Name</th>
+                                        <th style="color:white !important;">SKU</th>
                                         <th style="color:white !important;" class="text-center">Action</th>
                                     </tr>
                                 </thead>
@@ -67,6 +68,7 @@
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
                                             <td>{{ $product->name }}</td>
+                                            <td>{{ $product->sku }}</td>
                                             <td class="text-center">
                                                 <a href="{{ route('product.edit', $product->id) }}" class="btn btn-sm btn-edit me-1">
                                                     <i class="fas fa-edit"></i> 

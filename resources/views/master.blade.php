@@ -298,13 +298,13 @@
 
                                 <li>
                                     <a href="{{ route('borrowers.index') }}" class="{{ Request::routeIs('borrowers.index') ? 'active' : '' }}">
-                                        <i class="fas fa-user-group text-info me-2"></i> Borrowed By
+                                        <i class="fas fa-user-group text-info me-2"></i> Loan By  
                                     </a>
                                 </li>
 
                                 <li>
                                     <a href="{{ route('borrowers.create') }}" class="{{ Request::routeIs('borrowers.create') ? 'active' : '' }}">
-                                        <i class="fas fa-user-clock text-success me-2"></i> New Borrowing
+                                        <i class="fas fa-user-clock text-success me-2"></i> Loan By List
                                     </a>
                                 </li>
 

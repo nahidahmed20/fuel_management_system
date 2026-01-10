@@ -28,9 +28,10 @@ class ProductController extends Controller
     {
         $request->validate([
             'name' => 'required|string|unique:products,name',
+            'sku'  => 'required'
         ]);
 
-        Product::create(['name' => $request->name]);
+        Product::create(['name' => $request->name, 'sku' => $request->sku]);
 
         return redirect()->route('product.index')->with('success', 'Product added.');
     }
@@ -44,10 +45,12 @@ class ProductController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255|unique:products,name,' . $product->id,
+            'sku'  => 'required'
         ]);
 
         $product->update([
             'name' => $request->name,
+            'sku'  => $request->sku,
         ]);
 
         return redirect()->route('product.index')->with('success', 'Product updated successfully.');

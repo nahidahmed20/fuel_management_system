@@ -55,9 +55,16 @@
                     <div class="card-body">
                         <form action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
-                            <div class="mb-3 col-md-4">
-                                <label for="name" class="form-label">Product Name</label>
-                                <input type="text" name="name" id="name" class="form-control" placeholder="e.g. Laptop" required>
+                            <div class="row">
+                                <div class="mb-3 col-md-4">
+                                    <label for="name" class="form-label">Product Name</label>
+                                    <input type="text" name="name" id="name" class="form-control" placeholder="e.g. Laptop" required>
+                                </div>
+
+                                <div class="mb-3 col-md-4">
+                                    <label for="sku" class="form-label">SKU</label>
+                                    <input type="text" name="sku" id="sku" class="form-control" placeholder="Auto generated" readonly>
+                                </div>
                             </div>
                             <div class="d-flex justify-content-end">
                                 <button type="submit" class="btn mt-4 text-white" style="background: linear-gradient(45deg, #0f9b8e, #129990); padding: 6px 16px; border-radius: 2px; border: none;">
@@ -72,3 +79,23 @@
     </div>
 </div>
 @endsection
+@push('script')
+<script>
+    document.getElementById('name').addEventListener('input', function () {
+        let name = this.value.trim();
+
+        if (name.length === 0) {
+            document.getElementById('sku').value = '';
+            return;
+        }
+
+
+        // Random 4 digit number
+        let random = Math.floor(1000 + Math.random() * 9000);
+
+        let sku = `SK-${random}`;
+
+        document.getElementById('sku').value = sku;
+    });
+</script>
+@endpush

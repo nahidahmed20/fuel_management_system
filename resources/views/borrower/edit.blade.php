@@ -41,7 +41,7 @@
                     <div class="card-header d-flex justify-content-between align-items-center flex-wrap" style="background-color: #27548A; color: #fff;">
                         <div class="header-title">
                             <h4 class="card-title mb-0">
-                                <i class="fas fa-user-edit me-2"></i> Edit Borrower
+                                <i class="fas fa-user-edit me-2"></i> Edit 
                             </h4>
                         </div>
                         <a href="{{ route('borrowers.index') }}" 
@@ -58,7 +58,7 @@
 
                             <div class="row">
                                 <div class="mb-3 col-md-4">
-                                    <label for="name" class="form-label">Borrower Name <span class="text-danger">*</span></label>
+                                    <label for="name" class="form-label"> Name <span class="text-danger">*</span></label>
                                     <input type="text" name="name" value="{{ $borrower->name }}" class="form-control" required>
                                 </div>
 

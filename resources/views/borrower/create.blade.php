@@ -41,13 +41,13 @@
                     <div class="card-header d-flex justify-content-between align-items-center flex-wrap" style="background-color: #27548A; color: #fff;">
                         <div class="header-title">
                             <h4 class="card-title mb-0">
-                                <i class="fas fa-user-plus me-2"></i> Add New Borrower
+                                <i class="fas fa-user-plus me-2"></i> Add Loan By
                             </h4>
                         </div>
                         <a href="{{ route('borrowers.index') }}" 
                         class="btn btn-sm d-flex justify-content-center align-items-center mt-2 mt-sm-0"
-                        style="background: linear-gradient(45deg, #36D1DC, #5B86E5); color: white; border: none; font-weight: 500; padding: 6px 12px; border-radius: 0px;">
-                            <i class="fas fa-arrow-left me-1"></i> Borrower List
+                        style="background: linear-gradient(45deg, #36D1DC, #5B86E5); color: white; border: none; font-weight: 500; padding: 6px 12px; border-radius: 2px;">
+                             List
                         </a>
                     </div>
 
@@ -57,7 +57,7 @@
 
                             <div class="row">
                                 <div class="mb-3 col-md-4">
-                                    <label for="name" class="form-label">Borrower Name <span class="text-danger">*</span></label>
+                                    <label for="name" class="form-label"> Name <span class="text-danger">*</span></label>
                                     <input type="text" name="name" class="form-control" placeholder="e.g. Nahid" required>
                                 </div>
 

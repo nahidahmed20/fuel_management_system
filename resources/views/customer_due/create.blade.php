@@ -35,7 +35,7 @@
         border-radius: 0px !important;
     }
     .select2-container--default .select2-selection--single .select2-selection__rendered{
-        line-height: 22px;
+        line-height: 22px !important;
     }
     .select2-container .select2-selection--single {
         height: 38px !important;

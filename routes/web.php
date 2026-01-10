@@ -159,10 +159,11 @@ Route::middleware('auth')->group(function () {
         Route::get('/', [ProductStockController::class, 'index'])->name('product.stock.index');
         Route::get('/create', [ProductStockController::class, 'create'])->name('product.stock.create');
         Route::post('/store', [ProductStockController::class, 'store'])->name('product.stock.store');
-        Route::get('/edit/{id}', [ProductStockController::class, 'edit'])->name('product.stock.edit');
-        Route::post('/update/{id}', [ProductStockController::class, 'update'])->name('product.stock.update');
-        Route::get('/destroy/{id}', [ProductStockController::class, 'destroy'])->name('product.stock.destroy');
+        Route::get('/edit/{purchase}', [ProductStockController::class, 'edit'])->name('product.stock.edit');
+        Route::put('/update/{purchase}', [ProductStockController::class, 'update'])->name('product.stock.update');
+        Route::delete('/destroy/{purchase}', [ProductStockController::class, 'destroy'])->name('product.stock.destroy');
     });
+
 
     // Product Sales Route
     Route::prefix('product/sales')->group(function () {
